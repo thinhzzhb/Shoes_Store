@@ -4,9 +4,13 @@ import com.raven.event.EventMenu;
 import com.raven.form.Form;
 import com.raven.form.Form_1;
 import com.raven.form.Giao_dich;
+import com.raven.form.Khuyen_Mai;
 import com.raven.form.Nhan_Vien;
 import com.raven.form.San_Pham;
 import com.raven.form.login_Form;
+import com.service.impl.taiKhoan_Implement;
+import com.service.taiKhoan_Interface;
+import com.viewModel.CurrentUser;
 import java.awt.Color;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -31,20 +35,37 @@ public class Main extends javax.swing.JFrame {
                         showForm(new Form(index));
                         break;
                     case 1:
-                        showForm(new San_Pham());
-                        break;
+                        if (checkRole() == true) {
+                            showForm(new San_Pham());
+                            break;
+                        }
+                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
+                        return;
                     case 2:
-                        showForm(new Nhan_Vien());
-                        break;
+                        if (checkRole() == true) {
+                            showForm(new Nhan_Vien());
+                            break;
+                        }
+                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
+                        return;
+
                     case 3:
                         showForm(new Giao_dich());
                         break;
                     case 4:
-                        showForm(new Form(index));
-                        break;
+                        if (checkRole() == true) {
+                            showForm(new Khuyen_Mai());
+                            break;
+                        }
+                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
+                        return;
                     case 5:
-                        showForm(new Form_1());
-                        break;
+                        if (checkRole() == true) {
+                            showForm(new Form_1());
+                            break;
+                        }
+                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
+                        return;
                     case 6:
                         showForm(new Form(index));
                         break;
@@ -55,12 +76,14 @@ public class Main extends javax.swing.JFrame {
                         System.exit(0);
                         break;
                     default:
-                        
+
                 }
             }
         };
         menu1.initMenu(event);
-        showForm(new Form(0));
+
+        showForm(
+                new Form(0));
     }
 
     private void showForm(Component com) {
@@ -68,6 +91,15 @@ public class Main extends javax.swing.JFrame {
         body.add(com);
         body.revalidate();
         body.repaint();
+    }
+
+    private boolean checkRole() {
+        int role = CurrentUser.getInstance().getVaitro();
+        if (role == 1) {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     @SuppressWarnings("unchecked")

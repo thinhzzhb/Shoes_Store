@@ -7,6 +7,8 @@ import java.awt.RenderingHints;
 import java.awt.geom.Area;
 import java.awt.geom.Rectangle2D;
 import java.awt.geom.RoundRectangle2D;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Header extends javax.swing.JPanel {
 
@@ -14,6 +16,7 @@ public class Header extends javax.swing.JPanel {
         initComponents();
         setOpaque(false);
         setBackground(new Color(255,102,0));
+        setClock();
     }
 
     @SuppressWarnings("unchecked")
@@ -22,6 +25,8 @@ public class Header extends javax.swing.JPanel {
 
         buttonBadges1 = new com.raven.swing.ButtonBadges();
         buttonBadges2 = new com.raven.swing.ButtonBadges();
+        lblDate = new javax.swing.JLabel();
+        lblTime = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(255, 102, 0));
 
@@ -35,12 +40,25 @@ public class Header extends javax.swing.JPanel {
         buttonBadges2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/message.png"))); // NOI18N
         buttonBadges2.setBadges(15);
 
+        lblDate.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblDate.setText("Date");
+
+        lblTime.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblTime.setText("Time");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(539, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(87, 87, 87)
+                        .addComponent(lblTime))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(40, 40, 40)
+                        .addComponent(lblDate)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 426, Short.MAX_VALUE)
                 .addComponent(buttonBadges2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(3, 3, 3)
                 .addComponent(buttonBadges1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -51,7 +69,11 @@ public class Header extends javax.swing.JPanel {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(buttonBadges2, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDate)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(lblTime))
+                    .addComponent(buttonBadges2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(buttonBadges1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -68,10 +90,28 @@ public class Header extends javax.swing.JPanel {
         g2.dispose();
         super.paint(grphcs);
     }
-
+    private void setClock() {
+        Thread th1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    Date date = new Date();
+                    SimpleDateFormat formatDay = new SimpleDateFormat("dd MMM yyyy");
+                    SimpleDateFormat formatTime = new SimpleDateFormat("HH:mm:ss");
+                    String time = formatDay.format(date);
+                    String time2 = formatTime.format(date);
+                    lblDate.setText(time);
+                    lblTime.setText(time2);
+                }
+            }
+        });
+        th1.start();
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.ButtonBadges buttonBadges1;
     private com.raven.swing.ButtonBadges buttonBadges2;
+    private javax.swing.JLabel lblDate;
+    private javax.swing.JLabel lblTime;
     // End of variables declaration//GEN-END:variables
 }

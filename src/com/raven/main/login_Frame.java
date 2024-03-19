@@ -4,6 +4,13 @@
  */
 package com.raven.main;
 
+import com.model.TaiKhoan;
+import com.service.impl.taiKhoan_Implement;
+import com.service.taiKhoan_Interface;
+import com.viewModel.CurrentUser;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
+
 /**
  *
  * @author Admin
@@ -13,9 +20,14 @@ public class login_Frame extends javax.swing.JFrame {
     /**
      * Creates new form login_Frame
      */
+    private boolean ishidden = false;
+
+    taiKhoan_Interface tkser = new taiKhoan_Implement();
+
     public login_Frame() {
         initComponents();
-        
+        hideAndShowPassword();
+
     }
 
     /**
@@ -31,17 +43,19 @@ public class login_Frame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
-        jTextField3 = new javax.swing.JTextField();
+        txtUser = new javax.swing.JTextField();
         jPanel7 = new javax.swing.JPanel();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtPassword = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
         jPanel8 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
-        jLabel4 = new javax.swing.JLabel();
+        lblToggle = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
         jPanel9 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        lblerr = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
@@ -79,12 +93,12 @@ public class login_Frame extends javax.swing.JFrame {
         jPanel6.setPreferredSize(new java.awt.Dimension(250, 50));
         jPanel6.setLayout(new java.awt.BorderLayout(4, 4));
 
-        jTextField3.setBackground(new java.awt.Color(186, 79, 84));
-        jTextField3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jTextField3.setForeground(new java.awt.Color(255, 255, 255));
-        jTextField3.setText("Username");
-        jTextField3.setBorder(null);
-        jPanel6.add(jTextField3, java.awt.BorderLayout.PAGE_END);
+        txtUser.setBackground(new java.awt.Color(186, 79, 84));
+        txtUser.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        txtUser.setForeground(new java.awt.Color(255, 255, 255));
+        txtUser.setText("Username");
+        txtUser.setBorder(null);
+        jPanel6.add(txtUser, java.awt.BorderLayout.PAGE_END);
 
         jPanel5.add(jPanel6);
 
@@ -92,11 +106,11 @@ public class login_Frame extends javax.swing.JFrame {
         jPanel7.setPreferredSize(new java.awt.Dimension(250, 50));
         jPanel7.setLayout(new java.awt.BorderLayout(4, 4));
 
-        jPasswordField1.setBackground(new java.awt.Color(186, 79, 84));
-        jPasswordField1.setForeground(new java.awt.Color(255, 255, 255));
-        jPasswordField1.setText("123456789");
-        jPasswordField1.setBorder(null);
-        jPanel7.add(jPasswordField1, java.awt.BorderLayout.PAGE_END);
+        txtPassword.setBackground(new java.awt.Color(186, 79, 84));
+        txtPassword.setForeground(new java.awt.Color(255, 255, 255));
+        txtPassword.setText("123456789");
+        txtPassword.setBorder(null);
+        jPanel7.add(txtPassword, java.awt.BorderLayout.PAGE_END);
 
         jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
         jPanel7.add(jSeparator1, java.awt.BorderLayout.PAGE_START);
@@ -114,10 +128,15 @@ public class login_Frame extends javax.swing.JFrame {
         jCheckBox1.setPreferredSize(new java.awt.Dimension(130, 25));
         jPanel8.add(jCheckBox1, java.awt.BorderLayout.WEST);
 
-        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
-        jLabel4.setForeground(new java.awt.Color(255, 102, 102));
-        jLabel4.setText("Forgot password?");
-        jPanel8.add(jLabel4, java.awt.BorderLayout.EAST);
+        lblToggle.setBackground(new java.awt.Color(255, 255, 255));
+        lblToggle.setForeground(new java.awt.Color(255, 102, 102));
+        lblToggle.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/witness.png"))); // NOI18N
+        lblToggle.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                lblToggleMouseClicked(evt);
+            }
+        });
+        jPanel8.add(lblToggle, java.awt.BorderLayout.EAST);
 
         jSeparator2.setForeground(new java.awt.Color(204, 204, 204));
         jPanel8.add(jSeparator2, java.awt.BorderLayout.PAGE_START);
@@ -129,22 +148,51 @@ public class login_Frame extends javax.swing.JFrame {
         jPanel9.setBackground(new java.awt.Color(186, 79, 84));
         jPanel9.setPreferredSize(new java.awt.Dimension(400, 50));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Login");
-        jPanel9.add(jLabel1);
+        lblerr.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblerr.setForeground(new java.awt.Color(255, 204, 0));
+        jPanel9.add(lblerr);
 
         jPanel1.add(jPanel9);
 
         jPanel10.setBackground(new java.awt.Color(186, 79, 84));
         jPanel10.setPreferredSize(new java.awt.Dimension(400, 50));
 
-        jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Don't have account yet? Sign Up");
-        jPanel10.add(jLabel5);
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 255, 255));
+        jLabel1.setText("Log in");
+        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel1MouseClicked(evt);
+            }
+        });
+        jPanel10.add(jLabel1);
 
         jPanel1.add(jPanel10);
+
+        jPanel4.setBackground(new java.awt.Color(186, 79, 84));
+        jPanel4.setPreferredSize(new java.awt.Dimension(400, 50));
+
+        jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(204, 204, 255));
+        jLabel5.setText("Forget Password?");
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(241, Short.MAX_VALUE)
+                .addComponent(jLabel5)
+                .addGap(51, 51, 51))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jLabel5)
+                .addGap(0, 30, Short.MAX_VALUE))
+        );
+
+        jPanel1.add(jPanel4);
 
         jPanel2.setBackground(new java.awt.Color(43, 44, 75));
         jPanel2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -207,7 +255,7 @@ public class login_Frame extends javax.swing.JFrame {
                         .addComponent(jLabel3)))
                 .addGap(40, 40, 40)
                 .addComponent(jLabel8)
-                .addContainerGap(81, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -225,14 +273,10 @@ public class login_Frame extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 405, Short.MAX_VALUE)
+            .addGap(0, 507, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 507, Short.MAX_VALUE))
         );
 
         pack();
@@ -243,6 +287,68 @@ public class login_Frame extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_jLabel2MouseClicked
+
+    private void lblToggleMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblToggleMouseClicked
+        // TODO add your handling code here:
+        ishidden = !ishidden;
+        hideAndShowPassword();
+    }//GEN-LAST:event_lblToggleMouseClicked
+
+    private TaiKhoan getUser() {
+        String user = txtUser.getText();
+        String pass = txtPassword.getText();
+        TaiKhoan t = tkser.getUser(user, pass);
+        return t;
+    }
+    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+        // TODO add your handling code here:
+        if (txtUser.getText().trim().equals("")) {
+            lblerr.setText("Tên đăng nhập không được bỏ trống");
+            return;
+        } else if (new String(txtPassword.getPassword()).trim().equals("")) {
+            lblerr.setText("Mật khẩu không được bỏ trống");
+            return;
+        } else {
+            if (getUser() != null) {
+                Integer checkRole = getUser().getVaiTro();
+                String username = txtUser.getText();
+                if (checkRole == 1) {
+                    CurrentUser.getInstance().setUsername(username);
+                    CurrentUser.getInstance().setVaitro(checkRole);
+                    
+                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+                    this.dispose();
+                    Main m = new Main();
+                    m.setVisible(true);
+                } else if (checkRole == 2) {
+                    CurrentUser.getInstance().setUsername(username);
+                    CurrentUser.getInstance().setVaitro(checkRole);
+
+                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+                    this.dispose();
+                    Main m = new Main();
+                    m.setVisible(true);
+                }
+
+            } else {
+                lblerr.setText("Username hoặc Password không đúng!!");
+            }
+
+        }
+    }//GEN-LAST:event_jLabel1MouseClicked
+
+    private void hideAndShowPassword() {
+        if (ishidden) {
+            this.txtPassword.setEchoChar((char) 0);
+            this.lblToggle.setIcon(new ImageIcon("D:\\Da1_2024\\Shoes_Store\\src\\com\\raven\\icon\\hide.png"));
+        } else {
+            this.lblToggle.setIcon(new ImageIcon("D:\\Da1_2024\\Shoes_Store\\src\\com\\raven\\icon\\witness.png"));
+            if (txtPassword.getText().equals("Mật khẩu")) {
+                return;
+            }
+            this.txtPassword.setEchoChar('*');
+        }
+    }
 
     /**
      * @param args the command line arguments
@@ -284,7 +390,6 @@ public class login_Frame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
@@ -293,14 +398,17 @@ public class login_Frame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JPanel jPanel9;
-    private javax.swing.JPasswordField jPasswordField1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JLabel lblToggle;
+    private javax.swing.JLabel lblerr;
+    private javax.swing.JPasswordField txtPassword;
+    private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables
 }

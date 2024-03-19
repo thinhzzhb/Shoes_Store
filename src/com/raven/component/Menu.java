@@ -3,6 +3,7 @@ package com.raven.component;
 import com.raven.event.EventMenu;
 import com.raven.swing.ButtonMenu;
 import com.raven.swing.scrollbar.ScrollBarCustom;
+import com.viewModel.CurrentUser;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.event.ActionEvent;
@@ -23,6 +24,8 @@ public class Menu extends javax.swing.JPanel {
         sb.setForeground(new Color(130, 130, 130, 100));
         jScrollPane1.setVerticalScrollBar(sb);
         panelMenu.setLayout(new MigLayout("wrap, fillx, inset 3", "[fill]", "[]0[]"));
+        lblUser.setText(CurrentUser.getInstance().getUsername());
+        lblRole.setText(CurrentUser.getInstance().getVaitro() == 1 ?"Quản lý":"Nhân viên");
     }
 
     public void initMenu(EventMenu event) {
@@ -73,8 +76,8 @@ public class Menu extends javax.swing.JPanel {
 
         roundPanel1 = new com.raven.swing.RoundPanel();
         imageAvatar1 = new com.raven.swing.ImageAvatar();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        lblUser = new javax.swing.JLabel();
+        lblRole = new javax.swing.JLabel();
         roundPanel2 = new com.raven.swing.RoundPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         panelMenu = new javax.swing.JPanel();
@@ -85,12 +88,13 @@ public class Menu extends javax.swing.JPanel {
         imageAvatar1.setBorderSize(2);
         imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/profile.jpg"))); // NOI18N
 
-        jLabel1.setFont(new java.awt.Font("sansserif", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(224, 224, 224));
-        jLabel1.setText("User Name");
+        lblUser.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
+        lblUser.setForeground(new java.awt.Color(255, 255, 255));
+        lblUser.setText("User Name");
 
-        jLabel2.setForeground(new java.awt.Color(203, 203, 203));
-        jLabel2.setText("Admin");
+        lblRole.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        lblRole.setForeground(new java.awt.Color(255, 255, 255));
+        lblRole.setText("Admin");
 
         javax.swing.GroupLayout roundPanel1Layout = new javax.swing.GroupLayout(roundPanel1);
         roundPanel1.setLayout(roundPanel1Layout);
@@ -101,8 +105,8 @@ public class Menu extends javax.swing.JPanel {
                 .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                    .addComponent(lblUser)
+                    .addComponent(lblRole))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         roundPanel1Layout.setVerticalGroup(
@@ -111,9 +115,9 @@ public class Menu extends javax.swing.JPanel {
                 .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(roundPanel1Layout.createSequentialGroup()
                         .addGap(21, 21, 21)
-                        .addComponent(jLabel1)
+                        .addComponent(lblUser)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2))
+                        .addComponent(lblRole))
                     .addGroup(roundPanel1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(imageAvatar1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -175,9 +179,9 @@ public class Menu extends javax.swing.JPanel {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private com.raven.swing.ImageAvatar imageAvatar1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblRole;
+    private javax.swing.JLabel lblUser;
     private javax.swing.JPanel panelMenu;
     private com.raven.swing.RoundPanel roundPanel1;
     private com.raven.swing.RoundPanel roundPanel2;
