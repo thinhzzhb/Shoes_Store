@@ -36,10 +36,10 @@ public class Menu extends javax.swing.JPanel {
         addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/4.png")), "Giao dịch", 3);
         addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/5.png")), "Khuyến mãi", 4);
         addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/6.png")), "Thống kê", 5);
-        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/7.png")), "Import", 6);
-        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/8.png")), "Setting", 7);
+        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/7.png")), "Khách hàng", 6);
+        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/8.png")), "Hóa đơn", 7);
         addEmpty();
-        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/logout.png")), "Logout", 8);
+        addMenu(new ImageIcon(getClass().getResource("/com/raven/icon/logout.png")), "Đăng xuất", 8);
     }
 
     private void addEmpty() {

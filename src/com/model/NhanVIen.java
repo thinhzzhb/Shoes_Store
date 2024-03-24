@@ -8,25 +8,25 @@ package com.model;
  *
  * @author Admin
  */
-public class NhanVIen {
+public class NhanVien {
 
     private int idNV;
     private String maNV;
     private String tenNV;
     private String diaChi;
     private String sdt;
-    private ChucVu idCv;
+    private TaiKhoan idTK;
 
-    public NhanVIen(int idNV, String maNV, String tenNV, String diaChi, String sdt, ChucVu idCv) {
+    public NhanVien() {
+    }
+
+    public NhanVien(int idNV, String maNV, String tenNV, String diaChi, String sdt, TaiKhoan idTK) {
         this.idNV = idNV;
         this.maNV = maNV;
         this.tenNV = tenNV;
         this.diaChi = diaChi;
         this.sdt = sdt;
-        this.idCv = idCv;
-    }
-
-    public NhanVIen() {
+        this.idTK = idTK;
     }
 
     public int getIdNV() {
@@ -69,17 +69,18 @@ public class NhanVIen {
         this.sdt = sdt;
     }
 
-    public ChucVu getIdCv() {
-        return idCv;
+    public TaiKhoan getIdTK() {
+        return idTK;
     }
 
-    public void setIdCv(ChucVu idCv) {
-        this.idCv = idCv;
+    public void setIdTK(TaiKhoan idTK) {
+        this.idTK = idTK;
     }
 
     @Override
     public String toString() {
-        return "NhanVIen{" + "idNV=" + idNV + ", maNV=" + maNV + ", tenNV=" + tenNV + ", diaChi=" + diaChi + ", sdt=" + sdt + ", idCv=" + idCv + '}';
+        return "NhanVIen{" + "idNV=" + idNV + ", maNV=" + maNV + ", tenNV=" + tenNV + ", diaChi=" + diaChi + ", sdt=" + sdt + ", idTK=" + idTK + '}';
     }
 
+    
 }

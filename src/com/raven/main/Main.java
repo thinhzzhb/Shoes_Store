@@ -4,6 +4,7 @@ import com.raven.event.EventMenu;
 import com.raven.form.Form;
 import com.raven.form.Form_1;
 import com.raven.form.Giao_dich;
+import com.raven.form.Khach_Hang;
 import com.raven.form.Khuyen_Mai;
 import com.raven.form.Nhan_Vien;
 import com.raven.form.San_Pham;
@@ -35,39 +36,39 @@ public class Main extends javax.swing.JFrame {
                         showForm(new Form(index));
                         break;
                     case 1:
-                        if (checkRole() == true) {
                             showForm(new San_Pham());
                             break;
-                        }
-                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
-                        return;
+//                        if (checkRole() == true) {
+//                        }
+//                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
+//                        return;
                     case 2:
-                        if (checkRole() == true) {
                             showForm(new Nhan_Vien());
                             break;
-                        }
-                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
-                        return;
+//                        if (checkRole() == true) {
+//                        }
+//                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
+//                        return;
 
                     case 3:
                         showForm(new Giao_dich());
                         break;
                     case 4:
-                        if (checkRole() == true) {
                             showForm(new Khuyen_Mai());
                             break;
-                        }
-                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
-                        return;
+//                        if (checkRole() == true) {
+//                        }
+//                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
+//                        return;
                     case 5:
-                        if (checkRole() == true) {
                             showForm(new Form_1());
                             break;
-                        }
-                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
-                        return;
+//                        if (checkRole() == true) {
+//                        }
+//                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
+//                        return;
                     case 6:
-                        showForm(new Form(index));
+                        showForm(new Khach_Hang());
                         break;
                     case 7:
                         showForm(new Form(index));
@@ -123,7 +124,7 @@ public class Main extends javax.swing.JFrame {
         roundPanel1.setLayout(roundPanel1Layout);
         roundPanel1Layout.setHorizontalGroup(
             roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(header2, javax.swing.GroupLayout.DEFAULT_SIZE, 1371, Short.MAX_VALUE)
+            .addComponent(header2, javax.swing.GroupLayout.DEFAULT_SIZE, 1385, Short.MAX_VALUE)
             .addGroup(roundPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(menu1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -137,7 +138,7 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(header2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(roundPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, 756, Short.MAX_VALUE)
+                    .addComponent(menu1, javax.swing.GroupLayout.DEFAULT_SIZE, 783, Short.MAX_VALUE)
                     .addComponent(body, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(10, 10, 10))
         );
@@ -161,7 +162,7 @@ public class Main extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
