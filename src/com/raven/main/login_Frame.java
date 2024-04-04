@@ -4,12 +4,16 @@
  */
 package com.raven.main;
 
-import com.model.TaiKhoan;
-import com.service.impl.taiKhoan_Implement;
-import com.service.taiKhoan_Interface;
+import com.service.IUserService;
+import com.service.impl.UserService;
 import com.viewModel.CurrentUser;
+import java.awt.Component;
+import java.awt.Window;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -22,7 +26,7 @@ public class login_Frame extends javax.swing.JFrame {
      */
     private boolean ishidden = false;
 
-    taiKhoan_Interface tkser = new taiKhoan_Implement();
+    IUserService service = new UserService();
 
     public login_Frame() {
         initComponents();
@@ -54,7 +58,7 @@ public class login_Frame extends javax.swing.JFrame {
         jPanel9 = new javax.swing.JPanel();
         lblerr = new javax.swing.JLabel();
         jPanel10 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        mybtn = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
@@ -110,6 +114,11 @@ public class login_Frame extends javax.swing.JFrame {
         txtPassword.setForeground(new java.awt.Color(255, 255, 255));
         txtPassword.setText("123456789");
         txtPassword.setBorder(null);
+        txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPasswordKeyReleased(evt);
+            }
+        });
         jPanel7.add(txtPassword, java.awt.BorderLayout.PAGE_END);
 
         jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
@@ -157,15 +166,18 @@ public class login_Frame extends javax.swing.JFrame {
         jPanel10.setBackground(new java.awt.Color(186, 79, 84));
         jPanel10.setPreferredSize(new java.awt.Dimension(400, 50));
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 255, 255));
-        jLabel1.setText("Log in");
-        jLabel1.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jLabel1MouseClicked(evt);
+        mybtn.setBackground(new java.awt.Color(186, 79, 84));
+        mybtn.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        mybtn.setForeground(new java.awt.Color(0, 255, 255));
+        mybtn.setText("Login");
+        mybtn.setBorder(null);
+        mybtn.setPreferredSize(new java.awt.Dimension(150, 38));
+        mybtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mybtnActionPerformed(evt);
             }
         });
-        jPanel10.add(jLabel1);
+        jPanel10.add(mybtn);
 
         jPanel1.add(jPanel10);
 
@@ -283,8 +295,14 @@ public class login_Frame extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
+    public void login(){
+        txtUser.grabFocus();
+    }
     private void jLabel2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel2MouseClicked
         // TODO add your handling code here:
+        if (JOptionPane.showConfirmDialog(this, "Bạn Có Chắc Chắn Muốn Thoát Không !") != JOptionPane.YES_OPTION) {
+            return;
+        }
         System.exit(0);
     }//GEN-LAST:event_jLabel2MouseClicked
 
@@ -294,48 +312,61 @@ public class login_Frame extends javax.swing.JFrame {
         hideAndShowPassword();
     }//GEN-LAST:event_lblToggleMouseClicked
 
-    private TaiKhoan getUser() {
-        String user = txtUser.getText();
-        String pass = txtPassword.getText();
-        TaiKhoan t = tkser.getUser(user, pass);
-        return t;
+    public boolean isLogin(){
+        String user = txtUser.getText().trim();
+        String pass = txtPassword.getText().trim();
+        boolean dangNhap = service.getUser(user, pass);
+        return dangNhap;
     }
-    private void jLabel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel1MouseClicked
+    public void btndangnhapEven(ActionListener event) {
+        mybtn.addActionListener(event);
+    }
+    private void mybtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mybtnActionPerformed
+//        // TODO add your handling code here:
+//        if (txtUser.getText().trim().equals("")) {
+//            lblerr.setText("Tên đăng nhập không được bỏ trống");
+//            return;
+//        } else if (new String(txtPassword.getPassword()).trim().equals("")) {
+//            lblerr.setText("Mật khẩu không được bỏ trống");
+//            return;
+//        } else {
+//            if (getUser() != null) {
+//                Integer checkRole = getUser().getVaiTro();
+//                String name = getUser().getTenNV();
+//                String username = txtUser.getText();
+//                if (checkRole == 1) {
+//                    CurrentUser.getInstance().setUsername(name);
+//                    CurrentUser.getInstance().setVaitro(checkRole);
+//                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+//                    this.dispose();
+//                    Main m = new Main();
+//                    m.setVisible(true);
+//                } else if (checkRole == 2) {
+//                    CurrentUser.getInstance().setUsername(name);
+//                    CurrentUser.getInstance().setVaitro(checkRole);
+//
+//                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
+//                    this.dispose();
+//                    Main m = new Main();
+//                    m.setVisible(true);
+//                }
+//
+//            } else {
+//                lblerr.setText("Username hoặc Password không đúng!!");
+//            }
+//
+//        }
+    }//GEN-LAST:event_mybtnActionPerformed
+
+    private void txtPasswordKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPasswordKeyReleased
         // TODO add your handling code here:
-        if (txtUser.getText().trim().equals("")) {
-            lblerr.setText("Tên đăng nhập không được bỏ trống");
-            return;
-        } else if (new String(txtPassword.getPassword()).trim().equals("")) {
-            lblerr.setText("Mật khẩu không được bỏ trống");
-            return;
-        } else {
-            if (getUser() != null) {
-                Integer checkRole = getUser().getVaiTro();
-                String username = txtUser.getText();
-                if (checkRole == 1) {
-                    CurrentUser.getInstance().setUsername(username);
-                    CurrentUser.getInstance().setVaitro(checkRole);
-                    
-                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
-                    this.dispose();
-                    Main m = new Main();
-                    m.setVisible(true);
-                } else if (checkRole == 2) {
-                    CurrentUser.getInstance().setUsername(username);
-                    CurrentUser.getInstance().setVaitro(checkRole);
-
-                    JOptionPane.showMessageDialog(this, "Đăng nhập thành công");
-                    this.dispose();
-                    Main m = new Main();
-                    m.setVisible(true);
-                }
-
-            } else {
-                lblerr.setText("Username hoặc Password không đúng!!");
+        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
+            if (isLogin() == true) {
+                Component comp = SwingUtilities.getRoot(this);
+                ((Window) comp).dispose();
             }
-
         }
-    }//GEN-LAST:event_jLabel1MouseClicked
+    }//GEN-LAST:event_txtPasswordKeyReleased
 
     private void hideAndShowPassword() {
         if (ishidden) {
@@ -387,7 +418,6 @@ public class login_Frame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
@@ -408,6 +438,7 @@ public class login_Frame extends javax.swing.JFrame {
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel lblToggle;
     private javax.swing.JLabel lblerr;
+    private javax.swing.JButton mybtn;
     private javax.swing.JPasswordField txtPassword;
     private javax.swing.JTextField txtUser;
     // End of variables declaration//GEN-END:variables

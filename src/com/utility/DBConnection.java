@@ -14,7 +14,7 @@ import java.sql.SQLException;
  *
  *
  *
- * @author HangNT
+ * @author Admin
  *
  */
 public class DBConnection {
@@ -23,7 +23,7 @@ public class DBConnection {
 
     public static final String PORT = "1433";
 
-    public static final String DBNAME = "shoes_store";
+    public static final String DBNAME = "DuAn1_shoes_store";
 
     public static final String USERNAME = "sa";
 

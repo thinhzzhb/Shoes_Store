@@ -28,7 +28,7 @@ public class Header extends javax.swing.JPanel {
         lblDate = new javax.swing.JLabel();
         lblTime = new javax.swing.JLabel();
 
-        setBackground(new java.awt.Color(255, 102, 0));
+        setBackground(new java.awt.Color(204, 255, 255));
 
         buttonBadges1.setBackground(new java.awt.Color(25, 25, 25));
         buttonBadges1.setForeground(new java.awt.Color(9, 129, 233));

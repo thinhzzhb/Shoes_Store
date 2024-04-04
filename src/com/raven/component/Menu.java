@@ -82,18 +82,17 @@ public class Menu extends javax.swing.JPanel {
         jScrollPane1 = new javax.swing.JScrollPane();
         panelMenu = new javax.swing.JPanel();
 
-        roundPanel1.setBackground(new java.awt.Color(255, 102, 0));
+        roundPanel1.setBackground(new java.awt.Color(204, 255, 255));
 
         imageAvatar1.setForeground(new java.awt.Color(231, 231, 231));
         imageAvatar1.setBorderSize(2);
         imageAvatar1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/raven/icon/profile.jpg"))); // NOI18N
 
         lblUser.setFont(new java.awt.Font("sansserif", 1, 18)); // NOI18N
-        lblUser.setForeground(new java.awt.Color(255, 255, 255));
         lblUser.setText("User Name");
 
         lblRole.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        lblRole.setForeground(new java.awt.Color(255, 255, 255));
+        lblRole.setForeground(new java.awt.Color(0, 0, 102));
         lblRole.setText("Admin");
 
         javax.swing.GroupLayout roundPanel1Layout = new javax.swing.GroupLayout(roundPanel1);
@@ -124,18 +123,18 @@ public class Menu extends javax.swing.JPanel {
                 .addGap(10, 10, 10))
         );
 
-        roundPanel2.setBackground(new java.awt.Color(255, 102, 0));
+        roundPanel2.setBackground(new java.awt.Color(102, 102, 255));
 
         jScrollPane1.setBorder(null);
         jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        panelMenu.setBackground(new java.awt.Color(255, 153, 0));
+        panelMenu.setBackground(new java.awt.Color(204, 204, 255));
 
         javax.swing.GroupLayout panelMenuLayout = new javax.swing.GroupLayout(panelMenu);
         panelMenu.setLayout(panelMenuLayout);
         panelMenuLayout.setHorizontalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 208, Short.MAX_VALUE)
+            .addGap(0, 222, Short.MAX_VALUE)
         );
         panelMenuLayout.setVerticalGroup(
             panelMenuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

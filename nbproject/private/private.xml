@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/Da1_2024/Shoes_Store/src/com/repository/voucher_Repo.java</file>
-            <file>file:/D:/Da1_2024/Shoes_Store/src/com/raven/form/Khuyen_Mai.java</file>
-            <file>file:/D:/Da1_2024/Shoes_Store/src/com/viewModel/sanPham_KhuyenMaiViewModel.java</file>
-            <file>file:/D:/Da1_2024/Shoes_Store/src/com/service/impl/voucher_impl.java</file>
-            <file>file:/D:/Da1_2024/Shoes_Store/src/com/raven/main/Main.java</file>
-            <file>file:/D:/Da1_2024/Shoes_Store/src/com/raven/form/San_Pham.java</file>
-            <file>file:/D:/Da1_2024/Shoes_Store/src/com/model/ChucVu.java</file>
-            <file>file:/D:/Da1_2024/Shoes_Store/src/com/model/Voucher.java</file>
-            <file>file:/D:/Da1_2024/Shoes_Store/src/com/service/voucher_Interface.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

@@ -4,16 +4,7 @@
  */
 package com.raven.form;
 
-import com.model.Voucher;
-import com.model.hangGiay;
-import com.service.impl.voucher_impl;
-import com.service.voucher_Interface;
-import com.viewModel.sanPham_KhuyenMaiViewModel;
-import java.util.ArrayList;
-import java.util.List;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JOptionPane;
-import javax.swing.table.DefaultTableModel;
+
 
 /**
  *
@@ -24,61 +15,17 @@ public class Khuyen_Mai extends javax.swing.JPanel {
     /**
      * Creates new form San_Pham
      */
-    private DefaultTableModel dtm = new DefaultTableModel();
-    private DefaultTableModel dtmSP = new DefaultTableModel();
-    private DefaultComboBoxModel<hangGiay> _dcmHang = new DefaultComboBoxModel();
-    private voucher_Interface voucherService;
-    private List<Voucher> lstVoucher;
-    private List<sanPham_KhuyenMaiViewModel> _lstSpMD;
-    private List<hangGiay> _lstHang;
+   
 
     public Khuyen_Mai() {
         initComponents();
         setOpaque(false);
-        voucherService = new voucher_impl();
-        lstVoucher = new ArrayList<>();
-        _lstSpMD = new ArrayList<>();
-
-        _lstHang = voucherService.getAllHang();
-        _lstSpMD = voucherService.getAllSP();
-        lstVoucher = voucherService.getAll();
-        dtm = (DefaultTableModel) tblKhuyenMai.getModel();
-        dtmSP = (DefaultTableModel) tblSPKM.getModel();
-        
-        loadTB(lstVoucher);
-        loadTBSP(_lstSpMD);
-        setItemForAllComboBox();
+       
     }
 
-    private void setItemForAllComboBox() {
+    
 
-        _dcmHang = (DefaultComboBoxModel) new DefaultComboBoxModel<>(_lstHang.toArray());
-        cbbHang.setModel((DefaultComboBoxModel) _dcmHang);
-    }
-
-    private void loadTB(List<Voucher> _lstV) {
-        dtm.setRowCount(0);
-        for (Voucher voucher : _lstV) {
-            dtm.addRow(voucher.toDataRow());
-        }
-
-    }
-
-    private void loadTBSP(List<sanPham_KhuyenMaiViewModel> _lsts) {
-        dtmSP.setRowCount(0);
-        int count = 1; // Biến để đếm số thứ tự
-
-        for (sanPham_KhuyenMaiViewModel sp : _lsts) {
-            Object[] rowData = sp.toDataRow();
-            // Thêm số thứ tự vào hàng dữ liệu
-            Object[] rowDataWithIndex = new Object[rowData.length + 1];
-            rowDataWithIndex[0] = count++; // Thêm số thứ tự vào cột đầu tiên
-            System.arraycopy(rowData, 0, rowDataWithIndex, 1, rowData.length);
-
-            dtmSP.addRow(rowDataWithIndex);
-        }
-
-    }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -123,14 +70,13 @@ public class Khuyen_Mai extends javax.swing.JPanel {
 
         setPreferredSize(new java.awt.Dimension(1124, 666));
 
-        jPanel1.setBackground(new java.awt.Color(255, 204, 153));
+        jPanel1.setBackground(new java.awt.Color(204, 255, 255));
         jPanel1.setPreferredSize(new java.awt.Dimension(1124, 666));
 
-        jPanel2.setBackground(new java.awt.Color(255, 153, 51));
+        jPanel2.setBackground(new java.awt.Color(204, 255, 255));
         jPanel2.setPreferredSize(new java.awt.Dimension(814, 50));
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Quản lý khuyến mãi");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -150,7 +96,7 @@ public class Khuyen_Mai extends javax.swing.JPanel {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel7.setBackground(new java.awt.Color(255, 204, 102));
+        jPanel7.setBackground(new java.awt.Color(204, 204, 255));
         jPanel7.setBorder(javax.swing.BorderFactory.createTitledBorder("Tạo khuyến mãi"));
 
         jLabel2.setText("Tên KM");
@@ -163,12 +109,12 @@ public class Khuyen_Mai extends javax.swing.JPanel {
 
         jLabel6.setText("Trạng thái");
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 204, 102));
+        jRadioButton1.setBackground(new java.awt.Color(204, 204, 255));
         buttonGroup1.add(jRadioButton1);
         jRadioButton1.setSelected(true);
         jRadioButton1.setText("Hoạt động");
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 204, 102));
+        jRadioButton2.setBackground(new java.awt.Color(204, 204, 255));
         buttonGroup1.add(jRadioButton2);
         jRadioButton2.setText("Dừng hoạt động");
 
@@ -208,9 +154,8 @@ public class Khuyen_Mai extends javax.swing.JPanel {
                                 .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextField2)
                             .addComponent(jTextField1)
-                            .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(jTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
-                                .addComponent(jTextField3, javax.swing.GroupLayout.Alignment.LEADING)))))
+                            .addComponent(jTextField4, javax.swing.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                            .addComponent(jTextField3))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -261,7 +206,7 @@ public class Khuyen_Mai extends javax.swing.JPanel {
                 .addContainerGap(45, Short.MAX_VALUE))
         );
 
-        jPanel8.setBackground(new java.awt.Color(255, 204, 102));
+        jPanel8.setBackground(new java.awt.Color(204, 204, 255));
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder("Sản phẩm áp dụng"));
 
         tblSPKM.setModel(new javax.swing.table.DefaultTableModel(
@@ -327,7 +272,7 @@ public class Khuyen_Mai extends javax.swing.JPanel {
                 .addContainerGap(31, Short.MAX_VALUE))
         );
 
-        jPanel9.setBackground(new java.awt.Color(255, 204, 102));
+        jPanel9.setBackground(new java.awt.Color(204, 204, 255));
         jPanel9.setBorder(javax.swing.BorderFactory.createTitledBorder("Danh sách khuyến mãi"));
 
         tblKhuyenMai.setModel(new javax.swing.table.DefaultTableModel(
@@ -389,16 +334,15 @@ public class Khuyen_Mai extends javax.swing.JPanel {
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(5, 5, 5)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addGap(23, 23, 23)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -409,7 +353,7 @@ public class Khuyen_Mai extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 749, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 740, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
