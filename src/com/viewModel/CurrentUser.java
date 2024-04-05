@@ -12,6 +12,7 @@ public class CurrentUser {
     private static CurrentUser instance;
     private String username;
     private int vaitro;
+    private int idNV;
     
     public CurrentUser() {
     }
@@ -37,6 +38,14 @@ public class CurrentUser {
 
     public void setVaitro(int vaitro) {
         this.vaitro = vaitro;
+    }
+
+    public int getIdNV() {
+        return idNV;
+    }
+
+    public void setIdNV(int idNV) {
+        this.idNV = idNV;
     }
     
     

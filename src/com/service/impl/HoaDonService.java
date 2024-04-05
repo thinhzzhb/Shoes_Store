@@ -81,6 +81,34 @@ public class HoaDonService implements IHoaDonService{
         return listHDCT;
     }
 
+    @Override
+    public List<HoaDonViewModel> getListHD(int TrangThai) {
+        List<HoaDonViewModel> _lstHoaDon = new ArrayList<>();
+        
+        List<HoaDon> list = repo.getListHD(TrangThai);
+        for (HoaDon hoaDon : list) {
+            HoaDonViewModel hd = new HoaDonViewModel();
+            hd.setMa(hoaDon.getMa());
+            hd.setNgayTao(hoaDon.getNgayTao());
+            hd.setTinhTrang(hoaDon.getTinhTrang());
+            hd.setUs(hoaDon.getUser());
+            _lstHoaDon.add(hd);
+        }
+        return _lstHoaDon;
+    }
+
+    @Override
+    public Integer saveHD(HoaDonViewModel hoaDon, int idNV) {
+        HoaDon h = new HoaDon();
+        h.setMa(hoaDon.getMa());
+        h.setNgayTao(hoaDon.getNgayTao());
+        h.setTinhTrang(0);
+        
+        Integer insertHD = repo.insertHoaDon(h, idNV);
+        
+        return insertHD;
+    }
+
     
     
 }

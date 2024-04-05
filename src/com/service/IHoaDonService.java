@@ -25,4 +25,7 @@ public interface IHoaDonService {
     
     List<HoaDonChiTietViewModel> getHDCT(String ma);
         
+    List<HoaDonViewModel> getListHD(int TrangThai);
+    
+    Integer saveHD(HoaDonViewModel hoaDon, int idNV);
 }

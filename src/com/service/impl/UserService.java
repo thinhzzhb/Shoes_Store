@@ -43,19 +43,21 @@ public class UserService implements IUserService {
         if (list != null) {
             for (User x : list) {
                 if (x.getVaiTro() == 1) {
-                    JOptionPane.showMessageDialog(new login_Frame(), "Đăng nhập thành công! (Quản Lý)");
+                    JOptionPane.showMessageDialog(new login_Frame(), "Đăng nhập thành công với chức vụ Quản Lý)");
                     String tenNV = x.getHo() + " " + x.getTenDem() + " " + x.getTen();
                     //gọi form main rồi lưu thông tin vào CurrentUser
                     CurrentUser.getInstance().setUsername(tenNV);
                     CurrentUser.getInstance().setVaitro(x.getVaiTro());
+                    CurrentUser.getInstance().setIdNV(x.getId());
                     new DashBoard().setVisible(true);
                     return true;
 
                 } else {
-                    JOptionPane.showMessageDialog(new login_Frame(), "Đăng nhập thành công! (Nhân Viên)");
+                    JOptionPane.showMessageDialog(new login_Frame(), "Đăng nhập thành công với chức vụ Nhân Viên");
                     String tenNV = x.getHo() + " " + x.getTenDem() + " " + x.getTen();
                     CurrentUser.getInstance().setUsername(tenNV);
                     CurrentUser.getInstance().setVaitro(x.getVaiTro());
+                    CurrentUser.getInstance().setIdNV(x.getId());
                     new DashBoard().setVisible(true);
                     return true;
                 }

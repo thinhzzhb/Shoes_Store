@@ -48,9 +48,11 @@ public class login_Frame extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jPanel6 = new javax.swing.JPanel();
         txtUser = new javax.swing.JTextField();
+        jLabel1 = new javax.swing.JLabel();
         jPanel7 = new javax.swing.JPanel();
         txtPassword = new javax.swing.JPasswordField();
         jSeparator1 = new javax.swing.JSeparator();
+        jLabel4 = new javax.swing.JLabel();
         jPanel8 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
         lblToggle = new javax.swing.JLabel();
@@ -92,6 +94,7 @@ public class login_Frame extends javax.swing.JFrame {
 
         jPanel5.setBackground(new java.awt.Color(186, 79, 84));
         jPanel5.setPreferredSize(new java.awt.Dimension(400, 160));
+        jPanel5.setLayout(null);
 
         jPanel6.setBackground(new java.awt.Color(186, 79, 84));
         jPanel6.setPreferredSize(new java.awt.Dimension(250, 50));
@@ -100,11 +103,16 @@ public class login_Frame extends javax.swing.JFrame {
         txtUser.setBackground(new java.awt.Color(186, 79, 84));
         txtUser.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         txtUser.setForeground(new java.awt.Color(255, 255, 255));
-        txtUser.setText("Username");
         txtUser.setBorder(null);
         jPanel6.add(txtUser, java.awt.BorderLayout.PAGE_END);
 
+        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("UserName");
+        jPanel6.add(jLabel1, java.awt.BorderLayout.LINE_START);
+
         jPanel5.add(jPanel6);
+        jPanel6.setBounds(75, 5, 250, 50);
 
         jPanel7.setBackground(new java.awt.Color(186, 79, 84));
         jPanel7.setPreferredSize(new java.awt.Dimension(250, 50));
@@ -112,7 +120,6 @@ public class login_Frame extends javax.swing.JFrame {
 
         txtPassword.setBackground(new java.awt.Color(186, 79, 84));
         txtPassword.setForeground(new java.awt.Color(255, 255, 255));
-        txtPassword.setText("123456789");
         txtPassword.setBorder(null);
         txtPassword.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -124,7 +131,13 @@ public class login_Frame extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(204, 204, 204));
         jPanel7.add(jSeparator1, java.awt.BorderLayout.PAGE_START);
 
+        jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("PassWord");
+        jPanel7.add(jLabel4, java.awt.BorderLayout.LINE_START);
+
         jPanel5.add(jPanel7);
+        jPanel7.setBounds(75, 60, 250, 50);
 
         jPanel8.setBackground(new java.awt.Color(186, 79, 84));
         jPanel8.setPreferredSize(new java.awt.Dimension(250, 30));
@@ -135,7 +148,7 @@ public class login_Frame extends javax.swing.JFrame {
         jCheckBox1.setForeground(new java.awt.Color(255, 255, 255));
         jCheckBox1.setText("Remember me?");
         jCheckBox1.setPreferredSize(new java.awt.Dimension(130, 25));
-        jPanel8.add(jCheckBox1, java.awt.BorderLayout.WEST);
+        jPanel8.add(jCheckBox1, java.awt.BorderLayout.CENTER);
 
         lblToggle.setBackground(new java.awt.Color(255, 255, 255));
         lblToggle.setForeground(new java.awt.Color(255, 102, 102));
@@ -151,6 +164,7 @@ public class login_Frame extends javax.swing.JFrame {
         jPanel8.add(jSeparator2, java.awt.BorderLayout.PAGE_START);
 
         jPanel5.add(jPanel8);
+        jPanel8.setBounds(75, 115, 250, 30);
 
         jPanel1.add(jPanel5);
 
@@ -418,8 +432,10 @@ public class login_Frame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
