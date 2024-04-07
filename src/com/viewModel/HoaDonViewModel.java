@@ -4,8 +4,8 @@
  */
 package com.viewModel;
 
-import com.model.KhachHang;
-import com.model.User;
+import com.models.KhachHang;
+import com.models.User;
 import java.sql.Timestamp;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;

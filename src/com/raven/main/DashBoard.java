@@ -36,15 +36,15 @@ public class DashBoard extends javax.swing.JFrame {
                         showForm(new Form(index));
                         break;
                     case 1:
-                            showForm(new San_Pham());
-                            break;
+                        showForm(new San_Pham());
+                        break;
 //                        if (checkRole() == true) {
 //                        }
 //                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
 //                        return;
                     case 2:
-                            showForm(new Nhan_Vien());
-                            break;
+                        showForm(new Nhan_Vien());
+                        break;
 //                        if (checkRole() == true) {
 //                        }
 //                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
@@ -54,15 +54,15 @@ public class DashBoard extends javax.swing.JFrame {
                         showForm(new Giao_dich());
                         break;
                     case 4:
-                            showForm(new Khuyen_Mai());
-                            break;
+                        showForm(new Khuyen_Mai());
+                        break;
 //                        if (checkRole() == true) {
 //                        }
 //                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
 //                        return;
                     case 5:
-                            showForm(new Form_1());
-                            break;
+                        showForm(new Form_1());
+                        break;
 //                        if (checkRole() == true) {
 //                        }
 //                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
@@ -74,6 +74,9 @@ public class DashBoard extends javax.swing.JFrame {
                         showForm(new Lich_su());
                         break;
                     case 8:
+                        if (JOptionPane.showConfirmDialog(rootPane, "Bạn Có Chắc Chắn Muốn Thoát Không !") != JOptionPane.YES_OPTION) {
+                            return;
+                        }
                         System.exit(0);
                         break;
                     default:
@@ -87,7 +90,6 @@ public class DashBoard extends javax.swing.JFrame {
                 new Form(0));
     }
 
-    
     private void showForm(Component com) {
         body.removeAll();
         body.add(com);

@@ -4,8 +4,8 @@
  */
 package com.raven.main;
 
-import com.service.IUserService;
-import com.service.impl.UserService;
+import com.services.IUserService;
+import com.services.impl.UserService;
 import com.viewModel.CurrentUser;
 import java.awt.Component;
 import java.awt.Window;

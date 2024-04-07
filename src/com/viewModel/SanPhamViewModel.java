@@ -4,16 +4,20 @@
  */
 package com.viewModel;
 
+import com.models.KhuyenMai;
+import com.models.KichCo;
+import com.models.MauSac;
+
 /**
  *
- * @author Admin
+ * @author hungh
  */
 public class SanPhamViewModel {
-    private String Ma;
+   private String Ma;
    private String Ten;
-   private int mauSac;
-   private int khuyenMai;
-   private int kichCo;
+   private MauSac mauSac;
+   private KhuyenMai khuyenMai;
+   private KichCo kichCo;
   
     private int SoLuongTon;
    private Double GiaBan;
@@ -21,7 +25,7 @@ public class SanPhamViewModel {
     public SanPhamViewModel() {
     }
 
-    public SanPhamViewModel(String Ma, String Ten, int mauSac, int khuyenMai, int kichCo, int SoLuongTon, Double GiaBan) {
+    public SanPhamViewModel(String Ma, String Ten, MauSac mauSac, KhuyenMai khuyenMai, KichCo kichCo, int SoLuongTon, Double GiaBan) {
         this.Ma = Ma;
         this.Ten = Ten;
         this.mauSac = mauSac;
@@ -49,23 +53,22 @@ public class SanPhamViewModel {
         this.Ten = Ten;
     }
 
-    public int getMauSac() {
+    public MauSac getMauSac() {
         return mauSac;
     }
 
-    public void setMauSac(int mauSac) {
+    public void setMauSac(MauSac mauSac) {
         this.mauSac = mauSac;
     }
 
-    public int getKichCo() {
+    public KichCo getKichCo() {
         return kichCo;
     }
 
-    public void setKichCo(int kichCo) {
+    public void setKichCo(KichCo kichCo) {
         this.kichCo = kichCo;
     }
 
-    
 
     public int getSoLuongTon() {
         return SoLuongTon;
@@ -83,11 +86,11 @@ public class SanPhamViewModel {
         this.GiaBan = GiaBan;
     }
 
-    public int getKhuyenMai() {
+    public KhuyenMai getKhuyenMai() {
         return khuyenMai;
     }
 
-    public void setKhuyenMai(int khuyenMai) {
+    public void setKhuyenMai(KhuyenMai khuyenMai) {
         this.khuyenMai = khuyenMai;
     }
 
@@ -95,4 +98,7 @@ public class SanPhamViewModel {
     public String toString() {
         return Ten;
     }
+
+
+   
 }

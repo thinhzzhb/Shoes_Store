@@ -4,8 +4,8 @@
  */
 package com.raven.form;
 
-import com.service.IHoaDonService;
-import com.service.impl.HoaDonService;
+import com.services.IHoaDonService;
+import com.services.impl.HoaDonService;
 import com.viewModel.HoaDonChiTietViewModel;
 import com.viewModel.HoaDonViewModel;
 import java.text.SimpleDateFormat;
@@ -39,7 +39,7 @@ public class Lich_su extends javax.swing.JPanel {
         for (HoaDonViewModel h : _listHoaDon) {
             _dtmHD.addRow(new Object[]{
                 h.getMa(),
-                h.getKh().getTen(),
+               (h.getKh() != null) ? h.getKh().getTen() : "",
                 h.getUs().getTen(),
                 h.getNgayTaoAsString(),
                 h.getNgayThanhToan(),
@@ -57,7 +57,7 @@ public class Lich_su extends javax.swing.JPanel {
         for (HoaDonViewModel h : _listByTen) {
             _dtmHD.addRow(new Object[]{
                 h.getMa(),
-                h.getKh().getTen(),
+                (h.getKh() != null) ? h.getKh().getTen() : "",
                 h.getUs().getTen(),
                 h.getNgayTaoAsString(),
                 h.getNgayThanhToan(),
@@ -76,7 +76,7 @@ public class Lich_su extends javax.swing.JPanel {
         for (HoaDonViewModel h : _listByTT) {
             _dtmHD.addRow(new Object[]{
                 h.getMa(),
-                h.getKh().getTen(),
+                (h.getKh() != null) ? h.getKh().getTen() : "",
                 h.getUs().getTen(),
                 h.getNgayTaoAsString(),
                 h.getNgayThanhToan(),
@@ -335,7 +335,7 @@ public class Lich_su extends javax.swing.JPanel {
                 _dtmHD.addRow(new Object[]{
                     hoaDonViewModel.getMa(),
                     hoaDonViewModel.getUs().getTen(),
-                    hoaDonViewModel.getKh().getTen(),
+                    (hoaDonViewModel.getKh() != null) ? hoaDonViewModel.getKh().getTen() : "",
                     hoaDonViewModel.getTongTien(),
                     hoaDonViewModel.getNgayTao(),
                     hoaDonViewModel.getNgayThanhToan(),

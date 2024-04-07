@@ -4,10 +4,11 @@
  */
 package com.viewModel;
 
-import com.model.HoaDon;
-import com.model.KichCo;
-import com.model.MauSac;
-import com.model.SanPham_t;
+import com.models.HoaDon;
+import com.models.KichCo;
+import com.models.MauSac;
+import com.models.ChiTietSP;
+import com.models.SanPham;
 
 /**
  *
@@ -17,14 +18,14 @@ public class HoaDonChiTietViewModel {
     private int Soluong;
     private Double DonGia;
     private HoaDon haDon;
-    private SanPham_t sanPham;
+    private SanPham sanPham;
     private MauSac mauSac;
     private KichCo kichCo;
 
     public HoaDonChiTietViewModel() {
     }
 
-    public HoaDonChiTietViewModel(int Soluong, Double DonGia, HoaDon haDon, SanPham_t sanPham, MauSac mauSac, KichCo kichCo) {
+    public HoaDonChiTietViewModel(int Soluong, Double DonGia, HoaDon haDon, SanPham sanPham, MauSac mauSac, KichCo kichCo) {
         this.Soluong = Soluong;
         this.DonGia = DonGia;
         this.haDon = haDon;
@@ -59,11 +60,11 @@ public class HoaDonChiTietViewModel {
         this.haDon = haDon;
     }
 
-    public SanPham_t getSanPham() {
+    public SanPham getSanPham() {
         return sanPham;
     }
 
-    public void setSanPham(SanPham_t sanPham) {
+    public void setSanPham(SanPham sanPham) {
         this.sanPham = sanPham;
     }
 
