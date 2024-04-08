@@ -1192,7 +1192,6 @@ public class Giao_dich extends javax.swing.JPanel implements Runnable, ThreadFac
                     int rowHD = tblHoaDon.getSelectedRow();
                     if (rowHD < 0) {
                         JOptionPane.showMessageDialog(this, "Bạn cần chọn hóa đơn để thêm sản phẩm!");
-                        System.out.println("vào check chọn HD");
                         continue; // Tiếp tục vòng lặp để quét mã vạch khác
                     }
 

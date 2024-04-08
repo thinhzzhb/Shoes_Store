@@ -10,6 +10,7 @@ import com.raven.form.Nhan_Vien;
 import com.raven.form.San_Pham;
 import com.raven.form.Lich_su;
 import com.raven.form.Thong_ke;
+import com.raven.form.frm_Login;
 
 import com.viewModel.CurrentUser;
 import java.awt.Color;
@@ -17,7 +18,7 @@ import java.awt.Component;
 import javax.swing.JOptionPane;
 
 public class DashBoard extends javax.swing.JFrame {
-
+    
     public DashBoard() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
@@ -80,23 +81,23 @@ public class DashBoard extends javax.swing.JFrame {
                         System.exit(0);
                         break;
                     default:
-
+                    
                 }
             }
         };
         menu1.initMenu(event);
-
+        
         showForm(
                 new Form(0));
     }
-
+    
     private void showForm(Component com) {
         body.removeAll();
         body.add(com);
         body.revalidate();
         body.repaint();
     }
-
+    
     private boolean checkRole() {
         int role = CurrentUser.getInstance().getVaitro();
         if (role == 1) {
@@ -105,7 +106,7 @@ public class DashBoard extends javax.swing.JFrame {
             return false;
         }
     }
-
+    
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

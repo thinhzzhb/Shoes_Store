@@ -2,6 +2,11 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/D:/Da1_2024/Shoes_Store/src/com/Dto/NhanVienTable.java</file>
+            <file>file:/D:/Da1_2024/Shoes_Store/src/com/raven/form/Nhan_Vien.java</file>
+            <file>file:/D:/Da1_2024/Shoes_Store/src/com/repositories/impl/UserRepostory.java</file>
+            <file>file:/D:/Da1_2024/Shoes_Store/src/com/raven/form/Khach_Hang.java</file>
+        </group>
     </open-files>
 </project-private>

@@ -95,4 +95,113 @@ public class UserRepostory {
             return false;
         }
     }
+    
+    public ArrayList<User> getList(Integer trangThai){
+        ArrayList<User> list = new ArrayList<>();
+        String sql = "select * from Users ";
+        if(trangThai != null){
+            sql = "select * from Users where TrangThai = ?";
+        }
+        try {
+            
+            Connection conn = DBConnection.openDbConnection();
+            PreparedStatement pr = conn.prepareStatement(sql);
+            if(trangThai != null)
+                pr.setInt(1, trangThai);
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {
+                User user = new User();
+                user.setHo(rs.getString(4));
+                user.setTenDem(rs.getString(3));
+                user.setTen(rs.getString(2));
+                user.setVaiTro(rs.getInt(12));
+                user.setId(rs.getInt(1));
+                user.setMaNV(rs.getString(13));
+                user.setDiaChi(rs.getString(14));
+                list.add(user);
+            }
+
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        }
+        return list;
+    }
+    
+    public void save(User user){
+        StringBuilder query = new StringBuilder();
+        query.append("INSERT INTO ")
+                .append("Users('Ten','TenDem','Ho','Sdt','TaiKhoan','MatKhau','Email','TrangThai','vaiTro,'MaNV','DiaChi')")
+                .append("VALUES(? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? )");
+        try{
+            Connection con = (Connection) DBConnection.openDbConnection();  
+            PreparedStatement ps = con.prepareStatement(query.toString());
+            ps.setString(1,user.getTen());
+            ps.setString(2,user.getTenDem());
+            ps.setString(3,user.getHo());
+            ps.setString(4,user.getSdt());
+            ps.setString(5,user.getTaiKhoan());
+            ps.setString(6,user.getMatKhau());
+            ps.setString(7,user.getEmail());
+            ps.setInt(8,user.getTrangThai());
+            ps.setInt(9,user.getVaiTro());
+            ps.setString(10,user.getMaNV());
+            ps.setString(11,user.getDiaChi());
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        }
+    }
+    
+    public void update(Integer id, User user){
+        StringBuilder query = new StringBuilder();
+        query.append("UPDATE Users SET ")
+                .append(" Ten = ? ,")
+                .append(" TenDem = ? ,")
+                .append(" Ho = ? ,")
+                .append(" Sdt = ? ,")
+                .append(" TaiKhoan = ? ,")
+                .append(" MatKhau = ? ,")
+                .append(" Email = ? ,")
+                .append(" TrangThai = ? ,")
+                .append(" vaiTro = ? ,")
+                .append(" MaNV = ? ,")
+                .append(" DiaChi = ? ")
+                .append(" WHERE ")
+                .append(" id = ?");
+        try{
+            Connection con = (Connection) DBConnection.openDbConnection();  
+            PreparedStatement ps = con.prepareStatement(query.toString());
+            ps.setString(1,user.getTen());
+            ps.setString(2,user.getTenDem());
+            ps.setString(3,user.getHo());
+            ps.setString(4,user.getSdt());
+            ps.setString(5,user.getTaiKhoan());
+            ps.setString(6,user.getMatKhau());
+            ps.setString(7,user.getEmail());
+            ps.setInt(8,user.getTrangThai());
+            ps.setInt(9,user.getVaiTro());
+            ps.setString(10,user.getMaNV());
+            ps.setString(11,user.getDiaChi());
+            ps.setInt(12,id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        }
+    }
+    
+    public void delete(Integer id){
+        String query = "DELETE FROM Users WHERE Id = ? ";
+        try{
+            Connection con = (Connection) DBConnection.openDbConnection();  
+            PreparedStatement ps = con.prepareStatement(query);
+            ps.setInt(1, id);
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        }
+    }
 }

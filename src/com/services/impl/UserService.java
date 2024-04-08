@@ -13,6 +13,7 @@ import com.repositories.impl.UserRepostory;
 import com.services.IUserService;
 import com.viewModel.CurrentUser;
 import com.viewModel.UsersViewModel;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -82,4 +83,23 @@ public class UserService implements IUserService {
         return userRepostory.updateMK(new Users(us.getMk()), mail);
     }
 
+    @Override
+    public ArrayList<User> getList(Integer trangThai) {
+        return userRepostory.getList(trangThai);
+    }
+
+    @Override
+    public void add(User user) {
+        userRepostory.save(user);
+    }
+
+    @Override
+    public void update(Integer id, User user) {
+        userRepostory.update(id, user);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        userRepostory.delete(id);
+    }
 }

@@ -4,9 +4,10 @@
  */
 package com.repositories.impl;
 
+import com.helper.DBConnection;
 import com.models.ChiTietSP;
 import com.repositories.IChiTietSPRepository;
-import com.helper.DBConnection;
+import java.math.BigDecimal;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -67,7 +68,7 @@ public class ChiTietSPRepository implements IChiTietSPRepository{
 
     @Override
     public int update(ChiTietSP x, String Ma) {
-        return DBConnection.ExcuteQuery(SQL_UPDATE, x.getMa(), x.getTen(), x.getIdNsx(), x.getIdMauSac(), x.getIdDanhMuc(), x.getIdKichCo(),1,   x.getSoLuongTon(),x.getMoTa(), x.getGiaNhap(), x.getGiaBan(), Ma);
+        return DBConnection.ExcuteQuery(SQL_UPDATE, x.getMa(), x.getTen(), x.getIdNsx(), x.getIdMauSac(), x.getIdDanhMuc(), x.getIdKichCo(), x.getMoTa(), x.getSoLuongTon(), x.getGiaNhap(), x.getGiaBan(), Ma);
     }
 
     @Override

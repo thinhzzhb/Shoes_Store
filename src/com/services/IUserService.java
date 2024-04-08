@@ -4,8 +4,10 @@
  */
 package com.services;
 
+import com.models.User;
 import com.models.Users;
 import com.viewModel.UsersViewModel;
+import java.util.ArrayList;
 
 
 /**
@@ -19,4 +21,12 @@ public interface IUserService {
     Users getUserbytk(String tk);
     
     boolean updateMK(UsersViewModel us, String mail);
+    
+    ArrayList<User> getList(Integer trangThai);
+    
+    void add(User user);
+   
+    void update(Integer id, User user);
+    
+    void delete(Integer id);
 }

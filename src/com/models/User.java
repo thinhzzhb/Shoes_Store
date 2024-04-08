@@ -22,8 +22,11 @@ public class User {
     private String TaiKhoan;
     private String MatKhau;
     private String Email;
+    private String maNV;
+    private String diaChi;
     private int TrangThai;
     private int vaiTro;
+
     public User() {
     }
 
@@ -39,6 +42,23 @@ public class User {
         this.Email = Email;
         this.TrangThai = TrangThai;
         this.id = id;
+        this.vaiTro = vaiTro;
+    }
+
+    public User(int id, String Ten, String TenDem, String Ho, Date NgaySinh, Boolean GioTinh, String Sdt, String TaiKhoan, String MatKhau, String Email, String maNV, String diaChi, int TrangThai, int vaiTro) {
+        this.id = id;
+        this.Ten = Ten;
+        this.TenDem = TenDem;
+        this.Ho = Ho;
+        this.NgaySinh = NgaySinh;
+        this.GioTinh = GioTinh;
+        this.Sdt = Sdt;
+        this.TaiKhoan = TaiKhoan;
+        this.MatKhau = MatKhau;
+        this.Email = Email;
+        this.maNV = maNV;
+        this.diaChi = diaChi;
+        this.TrangThai = TrangThai;
         this.vaiTro = vaiTro;
     }
 
@@ -60,6 +80,22 @@ public class User {
 
     public String getHo() {
         return Ho;
+    }
+
+    public String getMaNV() {
+        return maNV;
+    }
+
+    public void setMaNV(String maNV) {
+        this.maNV = maNV;
+    }
+
+    public String getDiaChi() {
+        return diaChi;
+    }
+
+    public void setDiaChi(String diaChi) {
+        this.diaChi = diaChi;
     }
 
     public void setHo(String Ho) {
@@ -129,7 +165,6 @@ public class User {
     public void setVaiTro(int vaiTro) {
         this.vaiTro = vaiTro;
     }
-
 
     public int getId() {
         return id;
