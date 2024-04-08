@@ -4,6 +4,9 @@
  */
 package com.services;
 
+import com.models.Users;
+import com.viewModel.UsersViewModel;
+
 
 /**
  *
@@ -12,4 +15,8 @@ package com.services;
 public interface IUserService {
 
     boolean getUser(String TaiKhoan, String MatKhau);
+    
+    Users getUserbytk(String tk);
+    
+    boolean updateMK(UsersViewModel us, String mail);
 }

@@ -5,7 +5,8 @@
 package com.repositories.impl;
 
 import com.models.User;
-import com.utility.DBConnection;
+import com.models.Users;
+import com.helper.DBConnection;
 import java.sql.*;
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -17,6 +18,7 @@ import java.util.List;
  * @author Admin
  */
 public class UserRepostory {
+    final String SQL_SELECT_BY_TK = "SELECT id, Ten, TenDem, Ho, NgaySinh, Gioitinh, Sdt, vaiTro, TaiKhoan, MatKhau, Email, TrangThai FROM Users where Taikhoan = ?";
 
     public List<User> getUser(String TaiKhoan, String MatKhau) {
         List<User> list = new ArrayList<>();
@@ -41,5 +43,56 @@ public class UserRepostory {
             e.printStackTrace();
         }
         return list;
+    }
+    public Users getUserbytk(String tk) {
+        Users x = new Users();
+        try {
+            x = getdataQuery(SQL_SELECT_BY_TK, tk).get(0);
+        } catch (Exception e) {
+            x = new Users();
+        }
+        return x;
+    }
+    
+    private List<Users> getdataQuery(String SQL, Object... arvg) {
+        List<Users> lst = new ArrayList<>();
+
+        try {
+            ResultSet rs = DBConnection.getDataFromQuery(SQL, arvg);
+            while (rs.next()) {
+                String id = rs.getString(1);
+                String ten = rs.getString(2);
+                String tendem = rs.getString(3);
+                String ho = rs.getString(4);
+                String ngaysinh = rs.getString(5);
+                Integer gioitinh = rs.getInt(6);
+                String sdt = rs.getString(7);
+                int vaitro = rs.getInt(8);
+                String tk = rs.getString(9);
+                String mk = rs.getString(10);
+                String email = rs.getString(11);
+                Integer tt = rs.getInt(12);
+
+                lst.add(new Users(id, ten, tendem, ho, ngaysinh, gioitinh, sdt, tk, mk, email, vaitro, tt));
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return lst;
+    }
+
+    public boolean updateMK(Users us, String mail) {
+        String sql = "UPDATE Users SET MatKhau = ? WHERE TaiKhoan = ?";
+        try {
+            Connection conn = DBConnection.openDbConnection();
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, us.getMk());
+            pstm.setString(2, mail);
+            pstm.executeUpdate();
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 }

@@ -6,7 +6,7 @@ package com.repositories.impl;
 
 import com.models.KhuyenMai;
 import com.repositories.IKhuyenMaiRepository;
-import com.utility.DBConnection;
+import com.helper.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;

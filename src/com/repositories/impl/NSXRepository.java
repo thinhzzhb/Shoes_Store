@@ -6,7 +6,7 @@ package com.repositories.impl;
 
 import com.models.NSX;
 import com.repositories.INSXRepository;
-import com.utility.DBConnection;
+import com.helper.DBConnection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;

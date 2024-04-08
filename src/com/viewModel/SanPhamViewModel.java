@@ -10,7 +10,7 @@ import com.models.MauSac;
 
 /**
  *
- * @author hungh
+ * @author Admin
  */
 public class SanPhamViewModel {
    private String Ma;

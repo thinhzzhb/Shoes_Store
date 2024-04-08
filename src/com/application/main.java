@@ -4,7 +4,7 @@
  */
 package com.application;
 
-import com.raven.main.login_Frame;
+import com.raven.form.frm_Login;
 
 /**
  *
@@ -12,6 +12,6 @@ import com.raven.main.login_Frame;
  */
 public class main {
     public static void main(String[] args) {
-        new login_Frame().setVisible(true);
+        new frm_Login().setVisible(true);
     }
 }

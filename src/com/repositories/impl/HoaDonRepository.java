@@ -12,7 +12,7 @@ import com.models.KichCo;
 import com.models.MauSac;
 import com.models.SanPham;
 import com.models.User;
-import com.utility.DBConnection;
+import com.helper.DBConnection;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -257,8 +257,8 @@ public class HoaDonRepository {
             String sql = "SELECT SP.Ma, SP.Ten, MauSac.Ten, KichCo.Ten, HDCT.Dongia, HDCT.Soluong, KM.Giatrigiam, KM.HinhthucKM, HDCT.IdCTSP "
                     + "FROM HoaDon HD JOIN HoaDonChiTiet HDCT ON HD.Id = HDCT.IdHD "
                     + "JOIN ChitietSP SP ON SP.Id = HDCT.IdCTSP join KhuyenMai km ON SP.IdKM = KM.Id "
-                    + "JOIN MauSac ON SP.IdMauSac = MauSac.id"
-                    + "JOIN KichCo ON SP.IdKC = KichCo.id"
+                    + "JOIN MauSac ON SP.IdMauSac = MauSac.id "
+                    + "JOIN KichCo ON SP.IdKC = KichCo.id "
                     + "WHERE HD.Ma = ?";
             Connection conn = DBConnection.openDbConnection();
             PreparedStatement pr = conn.prepareStatement(sql);

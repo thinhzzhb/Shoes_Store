@@ -107,7 +107,7 @@ public class San_Pham extends javax.swing.JPanel {
             barcode.setType(Linear.CODE128B);
             barcode.setData(x.getQrcode());
             barcode.setI(11.0f);
-            barcode.renderBarcode("E:\\Qrcode\\" + x.getTen() + ".png");
+            barcode.renderBarcode("D:\\Qrcode\\" + x.getTen() + ".png");
             System.out.println("xuất thành công");
         } catch (Exception e) {
             System.out.println("xuất thất bại");
@@ -655,7 +655,7 @@ public class San_Pham extends javax.swing.JPanel {
                 loadData(iChiTietSPServices.getAll());
 //            xuatbarcode(x);
                 String data = x.getQrcode();
-                String path = "E:\\NetBean\\da1\\Shoes_Store//Qrcode//" + x.getTen() + ".png";
+                String path = "D:\\Da1_2024\\Shoes_Store//Qrcode//" + x.getTen() + ".png";
                 Map<EncodeHintType, ErrorCorrectionLevel> hashMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
                 hashMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
                 generateQRcode(data, path, hashMap, 200, 200);

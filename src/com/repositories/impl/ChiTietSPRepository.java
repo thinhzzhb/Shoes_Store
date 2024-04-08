@@ -6,7 +6,7 @@ package com.repositories.impl;
 
 import com.models.ChiTietSP;
 import com.repositories.IChiTietSPRepository;
-import com.utility.DBConnection;
+import com.helper.DBConnection;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;

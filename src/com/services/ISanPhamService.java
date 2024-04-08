@@ -20,9 +20,11 @@ public interface ISanPhamService {
 
     Integer getIdSanPham(String MaSP);
 
-    List<SanPham> seachSanPham(String Ten);
+    List<SanPhamViewModel> seachSanPham(String Ten);
 
     List<SanPham> seachBarCodeS(String barcode);
 
     List<SanPhamViewModel> locTheoDanhMucSP(String TenDanhMuc);
+    
+    SanPham seachBarCodeAdd(String barcode);
 }
