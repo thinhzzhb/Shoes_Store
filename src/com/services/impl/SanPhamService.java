@@ -95,4 +95,9 @@ public class SanPhamService implements ISanPhamService {
         return sanPhamReposory.seachBarCodeAdd(barcode);
     }
 
+    @Override
+    public SanPham getTenSanPham(int id) {
+        return sanPhamReposory.getTenSP(id);
+    }
+
 }

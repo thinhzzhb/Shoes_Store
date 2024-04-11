@@ -29,13 +29,13 @@ public class Thong_ke extends javax.swing.JPanel {
         initComponents();
         defaultTableModel = (DefaultTableModel) tblSanPham.getModel();
         setOpaque(false);
-        choDay.setVisible(false);
-        choMonth.setVisible(false);
-        choYear.setVisible(false);
-        choDateTu.setVisible(false);
-        choDateDen.setVisible(false);
-        lblTu.setVisible(false);
-        lblDen.setVisible(false);
+        choDay1.setVisible(false);
+        choMonth1.setVisible(false);
+        choYear1.setVisible(false);
+        choDateTu1.setVisible(false);
+        choDateDen1.setVisible(false);
+        lblTu1.setVisible(false);
+        lblDen1.setVisible(false);
         loadLbl();
         loadSP(repo.getsp());
     }
@@ -52,7 +52,7 @@ public class Thong_ke extends javax.swing.JPanel {
         for (ThongKe x : _lstTK) {
             defaultTableModel.addRow(new Object[]{
                 stt,
-                x.getChiTietSP(),
+                x.getSp(),
                 x.getSoSP()
             });
             stt++;
@@ -81,23 +81,23 @@ public class Thong_ke extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         lblSanPham = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        choDay = new com.toedter.calendar.JDayChooser();
-        cbbLoc = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        choMonth = new com.toedter.calendar.JMonthChooser();
-        rdoNgay = new javax.swing.JRadioButton();
-        rdoThang = new javax.swing.JRadioButton();
-        rdoNam = new javax.swing.JRadioButton();
-        rdoKhoang = new javax.swing.JRadioButton();
-        choYear = new com.toedter.calendar.JYearChooser();
-        lblTu = new javax.swing.JLabel();
-        choDateTu = new com.toedter.calendar.JMonthChooser();
-        lblDen = new javax.swing.JLabel();
-        choDateDen = new com.toedter.calendar.JMonthChooser();
         jPanel4 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblSanPham = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
+        choDay1 = new com.toedter.calendar.JDayChooser();
+        cbbLoc1 = new javax.swing.JComboBox<>();
+        choMonth1 = new com.toedter.calendar.JMonthChooser();
+        rdoNgay1 = new javax.swing.JRadioButton();
+        rdoThang1 = new javax.swing.JRadioButton();
+        rdoNam1 = new javax.swing.JRadioButton();
+        rdoKhoang1 = new javax.swing.JRadioButton();
+        choYear1 = new com.toedter.calendar.JYearChooser();
+        lblTu1 = new javax.swing.JLabel();
+        choDateTu1 = new com.toedter.calendar.JMonthChooser();
+        lblDen1 = new javax.swing.JLabel();
+        choDateDen1 = new com.toedter.calendar.JMonthChooser();
+        jLabel2 = new javax.swing.JLabel();
 
         setPreferredSize(new java.awt.Dimension(1124, 666));
 
@@ -212,101 +212,6 @@ public class Thong_ke extends javax.swing.JPanel {
 
         jPanel2.setBackground(new java.awt.Color(204, 204, 255));
         jPanel2.setLayout(null);
-        jPanel2.add(choDay);
-        choDay.setBounds(550, 0, 340, 130);
-
-        cbbLoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngày", "Tháng", "Năm" }));
-        cbbLoc.addItemListener(new java.awt.event.ItemListener() {
-            public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                cbbLocItemStateChanged(evt);
-            }
-        });
-        jPanel2.add(cbbLoc);
-        cbbLoc.setBounds(120, 50, 110, 22);
-
-        jLabel2.setText("Sắp xếp theo");
-        jPanel2.add(jLabel2);
-        jLabel2.setBounds(42, 54, 68, 16);
-        jPanel2.add(choMonth);
-        choMonth.setBounds(798, 34, 95, 22);
-
-        rdoNgay.setBackground(new java.awt.Color(204, 204, 255));
-        buttonGroup1.add(rdoNgay);
-        rdoNgay.setText("Ngày");
-        rdoNgay.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoNgayActionPerformed(evt);
-            }
-        });
-        rdoNgay.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                rdoNgayKeyReleased(evt);
-            }
-        });
-        jPanel2.add(rdoNgay);
-        rdoNgay.setBounds(901, 0, 115, 25);
-
-        rdoThang.setBackground(new java.awt.Color(204, 204, 255));
-        buttonGroup1.add(rdoThang);
-        rdoThang.setText("Tháng");
-        rdoThang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoThangActionPerformed(evt);
-            }
-        });
-        rdoThang.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                rdoThangKeyReleased(evt);
-            }
-        });
-        jPanel2.add(rdoThang);
-        rdoThang.setBounds(901, 31, 115, 25);
-
-        rdoNam.setBackground(new java.awt.Color(204, 204, 255));
-        buttonGroup1.add(rdoNam);
-        rdoNam.setText("Năm");
-        rdoNam.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoNamActionPerformed(evt);
-            }
-        });
-        rdoNam.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                rdoNamKeyReleased(evt);
-            }
-        });
-        jPanel2.add(rdoNam);
-        rdoNam.setBounds(901, 65, 115, 25);
-
-        rdoKhoang.setBackground(new java.awt.Color(204, 204, 255));
-        buttonGroup1.add(rdoKhoang);
-        rdoKhoang.setText("Tìm theo khoảng");
-        rdoKhoang.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoKhoangActionPerformed(evt);
-            }
-        });
-        rdoKhoang.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                rdoKhoangKeyReleased(evt);
-            }
-        });
-        jPanel2.add(rdoKhoang);
-        rdoKhoang.setBounds(901, 103, 115, 25);
-        jPanel2.add(choYear);
-        choYear.setBounds(798, 68, 95, 22);
-
-        lblTu.setText("Từ");
-        jPanel2.add(lblTu);
-        lblTu.setBounds(654, 107, 13, 16);
-        jPanel2.add(choDateTu);
-        choDateTu.setBounds(672, 103, 95, 22);
-
-        lblDen.setText("Đến");
-        jPanel2.add(lblDen);
-        lblDen.setBounds(772, 107, 21, 16);
-        jPanel2.add(choDateDen);
-        choDateDen.setBounds(798, 103, 95, 22);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -372,28 +277,165 @@ public class Thong_ke extends javax.swing.JPanel {
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 256, Short.MAX_VALUE)
                 .addContainerGap())
         );
+
+        cbbLoc1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ngày", "Tháng", "Năm" }));
+        cbbLoc1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                cbbLoc1ItemStateChanged(evt);
+            }
+        });
+
+        rdoNgay1.setBackground(new java.awt.Color(204, 204, 255));
+        buttonGroup1.add(rdoNgay1);
+        rdoNgay1.setText("Ngày");
+        rdoNgay1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoNgay1ActionPerformed(evt);
+            }
+        });
+        rdoNgay1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                rdoNgay1KeyReleased(evt);
+            }
+        });
+
+        rdoThang1.setBackground(new java.awt.Color(204, 204, 255));
+        buttonGroup1.add(rdoThang1);
+        rdoThang1.setText("Tháng");
+        rdoThang1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoThang1ActionPerformed(evt);
+            }
+        });
+        rdoThang1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                rdoThang1KeyReleased(evt);
+            }
+        });
+
+        rdoNam1.setBackground(new java.awt.Color(204, 204, 255));
+        buttonGroup1.add(rdoNam1);
+        rdoNam1.setText("Năm");
+        rdoNam1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoNam1ActionPerformed(evt);
+            }
+        });
+        rdoNam1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                rdoNam1KeyReleased(evt);
+            }
+        });
+
+        rdoKhoang1.setBackground(new java.awt.Color(204, 204, 255));
+        buttonGroup1.add(rdoKhoang1);
+        rdoKhoang1.setText("Tìm theo khoảng");
+        rdoKhoang1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rdoKhoang1ActionPerformed(evt);
+            }
+        });
+        rdoKhoang1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                rdoKhoang1KeyReleased(evt);
+            }
+        });
+
+        lblTu1.setText("Từ");
+
+        lblDen1.setText("Đến");
+
+        jLabel2.setText("Sắp xếp theo");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(50, 50, 50)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(101, 101, 101)
+                                        .addComponent(cbbLoc1, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(248, 248, 248)
+                                        .addComponent(choMonth1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(248, 248, 248)
+                                        .addComponent(choYear1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(104, 104, 104)
+                                        .addComponent(lblTu1)
+                                        .addGap(5, 5, 5)
+                                        .addComponent(choDateTu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGap(5, 5, 5)
+                                        .addComponent(lblDen1)
+                                        .addGap(5, 5, 5)
+                                        .addComponent(choDateDen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(choDay1, javax.swing.GroupLayout.PREFERRED_SIZE, 340, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(8, 8, 8)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(rdoNgay1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rdoThang1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rdoNam1, javax.swing.GroupLayout.PREFERRED_SIZE, 115, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(rdoKhoang1))))))
+                .addGap(0, 10, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(138, 138, 138)
-                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(69, 69, 69)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cbbLoc1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
+                        .addGap(74, 74, 74))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(34, 34, 34)
+                                .addComponent(choMonth1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(12, 12, 12)
+                                .addComponent(choYear1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(13, 13, 13)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(choDateTu1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(choDateDen1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(lblTu1)
+                                            .addComponent(lblDen1)))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(rdoNgay1)
+                                .addGap(6, 6, 6)
+                                .addComponent(rdoThang1)
+                                .addGap(9, 9, 9)
+                                .addComponent(rdoNam1)
+                                .addGap(13, 13, 13)
+                                .addComponent(rdoKhoang1))
+                            .addComponent(choDay1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(9, 9, 9))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -404,13 +446,13 @@ public class Thong_ke extends javax.swing.JPanel {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 673, Short.MAX_VALUE)
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    private void cbbLocItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbLocItemStateChanged
+    private void cbbLoc1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_cbbLoc1ItemStateChanged
         // TODO add your handling code here:
-        String TenDanhMuc = cbbLoc.getSelectedItem().toString();
+        String TenDanhMuc = cbbLoc1.getSelectedItem().toString();
         if (TenDanhMuc.equals("Ngày")) {
             lblSanPham.setText(String.valueOf(repo.getbyday()));
             lblHoaDon.setText(String.valueOf(repo.gethdday()));
@@ -431,126 +473,121 @@ public class Thong_ke extends javax.swing.JPanel {
             lblDoanhThu.setText(CurrencyConvert.formatCurrency(repo.getdtYear()));
 
             loadSP(repo.getspbyYear());
-
         }
-    }//GEN-LAST:event_cbbLocItemStateChanged
 
-    private void rdoNgayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNgayActionPerformed
+    }//GEN-LAST:event_cbbLoc1ItemStateChanged
+
+    private void rdoNgay1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNgay1ActionPerformed
         // TODO add your handling code here:
         rdoNgay();
-    }//GEN-LAST:event_rdoNgayActionPerformed
+    }//GEN-LAST:event_rdoNgay1ActionPerformed
 
-    private void rdoThangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoThangActionPerformed
+    private void rdoNgay1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rdoNgay1KeyReleased
+        // TODO add your handling code here:
+        rdoNgay();
+    }//GEN-LAST:event_rdoNgay1KeyReleased
+
+    private void rdoThang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoThang1ActionPerformed
         // TODO add your handling code here:
         rdoThang();
-    }//GEN-LAST:event_rdoThangActionPerformed
+    }//GEN-LAST:event_rdoThang1ActionPerformed
 
-    private void rdoNamActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNamActionPerformed
+    private void rdoThang1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rdoThang1KeyReleased
+        // TODO add your handling code here:
+        rdoThang();
+
+    }//GEN-LAST:event_rdoThang1KeyReleased
+
+    private void rdoNam1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoNam1ActionPerformed
         // TODO add your handling code here:
         rdoNam();
-    }//GEN-LAST:event_rdoNamActionPerformed
+    }//GEN-LAST:event_rdoNam1ActionPerformed
 
-    private void rdoKhoangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoKhoangActionPerformed
+    private void rdoNam1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rdoNam1KeyReleased
+        // TODO add your handling code here:
+        rdoNam();
+    }//GEN-LAST:event_rdoNam1KeyReleased
+
+    private void rdoKhoang1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoKhoang1ActionPerformed
         // TODO add your handling code here:
         rdoKhoang();
-    }//GEN-LAST:event_rdoKhoangActionPerformed
+    }//GEN-LAST:event_rdoKhoang1ActionPerformed
 
-    private void rdoNgay(){
-        choDay.setVisible(true);
-        choMonth.setVisible(false);
-        choYear.setVisible(false);
-        choDateTu.setVisible(false);
-        choDateDen.setVisible(false);
-        lblTu.setVisible(false);
-        lblDen.setVisible(false);
-        lblHoaDon.setText(String.valueOf(repo.gethdday(String.valueOf(choDay.getDay()))));
-        lblDoanhThu.setText(CurrencyConvert.formatCurrency(repo.getdtday(String.valueOf(choDay.getDay()))));
-        lblSanPham.setText(String.valueOf(repo.getbyday(String.valueOf(choDay.getDay()))));
-        loadSP(repo.getspday(String.valueOf(choDay.getDay())));
-    }
-    
-    private void rdoNgayKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rdoNgayKeyReleased
+    private void rdoKhoang1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rdoKhoang1KeyReleased
         // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            rdoNgay();
-        }
-    }//GEN-LAST:event_rdoNgayKeyReleased
+        rdoKhoang();
+    }//GEN-LAST:event_rdoKhoang1KeyReleased
 
-    private void rdoThang(){
-        choDay.setVisible(false);
-        choMonth.setVisible(true);
-        choYear.setVisible(false);
-        choDateTu.setVisible(false);
-        choDateDen.setVisible(false);
-        lblTu.setVisible(false);
-        lblDen.setVisible(false);
-        lblHoaDon.setText(String.valueOf(repo.gethdmonth(String.valueOf(choMonth.getMonth()))));
-        lblDoanhThu.setText(CurrencyConvert.formatCurrency(repo.getdtmonth(String.valueOf(choMonth.getMonth()))));
-        lblSanPham.setText(String.valueOf(repo.getbymonth(String.valueOf(choMonth.getMonth()))));
-        loadSP(repo.getspmonth(String.valueOf(choMonth.getMonth())));
+    private void rdoNgay() {
+        choDay1.setVisible(true);
+        choMonth1.setVisible(false);
+        choYear1.setVisible(false);
+        choDateTu1.setVisible(false);
+        choDateDen1.setVisible(false);
+        lblTu1.setVisible(false);
+        lblDen1.setVisible(false);
+        lblHoaDon.setText(String.valueOf(repo.gethdday(String.valueOf(choDay1.getDay()))));
+        lblDoanhThu.setText(CurrencyConvert.formatCurrency(repo.getdtday(String.valueOf(choDay1.getDay()))));
+        lblSanPham.setText(String.valueOf(repo.getbyday(String.valueOf(choDay1.getDay()))));
+        loadSP(repo.getspday(String.valueOf(choDay1.getDay())));
     }
-    private void rdoThangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rdoThangKeyReleased
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            rdoThang();
-        }
-    }//GEN-LAST:event_rdoThangKeyReleased
 
-    private void rdoNam(){
-        choDay.setVisible(false);
-        choMonth.setVisible(false);
-        choYear.setVisible(true);
-        choDateTu.setVisible(false);
-        choDateDen.setVisible(false);
-        lblTu.setVisible(false);
-        lblDen.setVisible(false);
-        lblHoaDon.setText(String.valueOf(repo.gethdyear(String.valueOf(choYear.getYear()))));
-        lblDoanhThu.setText(CurrencyConvert.formatCurrency(repo.getdtyear(String.valueOf(choYear.getYear()))));
-        lblSanPham.setText(String.valueOf(repo.getbyyear(String.valueOf(choYear.getYear()))));
-        loadSP(repo.getspyear(String.valueOf(choYear.getYear())));
+    private void rdoThang() {
+        choDay1.setVisible(false);
+        choMonth1.setVisible(true);
+        choYear1.setVisible(false);
+        choDateTu1.setVisible(false);
+        choDateDen1.setVisible(false);
+        lblTu1.setVisible(false);
+        lblDen1.setVisible(false);
+        lblHoaDon.setText(String.valueOf(repo.gethdmonth(String.valueOf(choMonth1.getMonth()))));
+        lblDoanhThu.setText(CurrencyConvert.formatCurrency(repo.getdtmonth(String.valueOf(choMonth1.getMonth()))));
+        lblSanPham.setText(String.valueOf(repo.getbymonth(String.valueOf(choMonth1.getMonth()))));
+        loadSP(repo.getspmonth(String.valueOf(choMonth1.getMonth())));
     }
-    private void rdoNamKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rdoNamKeyReleased
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            rdoNam();
-        }
-    }//GEN-LAST:event_rdoNamKeyReleased
 
-    private void rdoKhoang(){
-        choDay.setVisible(false);
-        choMonth.setVisible(false);
-        choYear.setVisible(false);
-        choDateTu.setVisible(true);
-        choDateDen.setVisible(true);
-        lblTu.setVisible(true);
-        lblDen.setVisible(true);
-        if (choDateTu.getMonth() + 1 > choDateDen.getMonth() + 1) {
+    private void rdoNam() {
+        choDay1.setVisible(false);
+        choMonth1.setVisible(false);
+        choYear1.setVisible(true);
+        choDateTu1.setVisible(false);
+        choDateDen1.setVisible(false);
+        lblTu1.setVisible(false);
+        lblDen1.setVisible(false);
+        lblHoaDon.setText(String.valueOf(repo.gethdyear(String.valueOf(choYear1.getYear()))));
+        lblDoanhThu.setText(CurrencyConvert.formatCurrency(repo.getdtyear(String.valueOf(choYear1.getYear()))));
+        lblSanPham.setText(String.valueOf(repo.getbyyear(String.valueOf(choYear1.getYear()))));
+        loadSP(repo.getspyear(String.valueOf(choYear1.getYear())));
+    }
+
+    private void rdoKhoang() {
+        choDay1.setVisible(false);
+        choMonth1.setVisible(false);
+        choYear1.setVisible(false);
+        choDateTu1.setVisible(true);
+        choDateDen1.setVisible(true);
+        lblTu1.setVisible(true);
+        lblDen1.setVisible(true);
+        if (choDateTu1.getMonth() + 1 > choDateDen1.getMonth() + 1) {
             JOptionPane.showMessageDialog(this, "Tháng bắt đầu phải nhỏ hơn tháng kết thúc");
             return;
         }
-        
-        lblHoaDon.setText(String.valueOf(repo.gethdkhoang1(String.valueOf(choDateTu.getMonth() + 1), String.valueOf(choDateDen.getMonth() + 1))));
-        lblDoanhThu.setText(CurrencyConvert.formatCurrency(repo.getdtkhoang1(String.valueOf(choDateTu.getMonth() + 1), String.valueOf(choDateDen.getMonth() + 1))));
-        lblSanPham.setText(String.valueOf(repo.getbykhoang1(String.valueOf(choDateTu.getMonth() + 1), String.valueOf(choDateDen.getMonth() + 1))));
-        loadSP(repo.getspkhoang(String.valueOf(choDateTu.getMonth() + 1), String.valueOf(choDateDen.getMonth() + 1)));
+
+        lblHoaDon.setText(String.valueOf(repo.gethdkhoang1(String.valueOf(choDateTu1.getMonth() + 1), String.valueOf(choDateDen1.getMonth() + 1))));
+        lblDoanhThu.setText(CurrencyConvert.formatCurrency(repo.getdtkhoang1(String.valueOf(choDateTu1.getMonth() + 1), String.valueOf(choDateDen1.getMonth() + 1))));
+        lblSanPham.setText(String.valueOf(repo.getbykhoang1(String.valueOf(choDateTu1.getMonth() + 1), String.valueOf(choDateDen1.getMonth() + 1))));
+        loadSP(repo.getspkhoang(String.valueOf(choDateTu1.getMonth() + 1), String.valueOf(choDateDen1.getMonth() + 1)));
     }
-    
-    private void rdoKhoangKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_rdoKhoangKeyReleased
-        // TODO add your handling code here:
-        if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            rdoKhoang();
-        }
-    }//GEN-LAST:event_rdoKhoangKeyReleased
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox<String> cbbLoc;
-    private com.toedter.calendar.JMonthChooser choDateDen;
-    private com.toedter.calendar.JMonthChooser choDateTu;
-    private com.toedter.calendar.JDayChooser choDay;
-    private com.toedter.calendar.JMonthChooser choMonth;
-    private com.toedter.calendar.JYearChooser choYear;
+    private javax.swing.JComboBox<String> cbbLoc1;
+    private com.toedter.calendar.JMonthChooser choDateDen1;
+    private com.toedter.calendar.JMonthChooser choDateTu1;
+    private com.toedter.calendar.JDayChooser choDay1;
+    private com.toedter.calendar.JMonthChooser choMonth1;
+    private com.toedter.calendar.JYearChooser choYear1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -564,15 +601,15 @@ public class Thong_ke extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel6;
     private javax.swing.JPanel jPanel7;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lblDen;
+    private javax.swing.JLabel lblDen1;
     private javax.swing.JLabel lblDoanhThu;
     private javax.swing.JLabel lblHoaDon;
     private javax.swing.JLabel lblSanPham;
-    private javax.swing.JLabel lblTu;
-    private javax.swing.JRadioButton rdoKhoang;
-    private javax.swing.JRadioButton rdoNam;
-    private javax.swing.JRadioButton rdoNgay;
-    private javax.swing.JRadioButton rdoThang;
+    private javax.swing.JLabel lblTu1;
+    private javax.swing.JRadioButton rdoKhoang1;
+    private javax.swing.JRadioButton rdoNam1;
+    private javax.swing.JRadioButton rdoNgay1;
+    private javax.swing.JRadioButton rdoThang1;
     private javax.swing.JTable tblSanPham;
     // End of variables declaration//GEN-END:variables
 

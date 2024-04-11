@@ -13,9 +13,6 @@ import java.sql.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 
 /**
  *
@@ -26,9 +23,9 @@ public class SanPhamRepostory {
     public List<SanPham> getListSanPham() throws SQLException {
         List<SanPham> getListSP = new ArrayList<>();
 
-        String sql = "SELECT SP.MA , SP.TEN , MS.Ten AS N'Màu Sắc' ,KM.Giatrigiam  , KM.HinhthucKM , KC.Ten AS N'Kích Cỡ' , SP.SoLuongTon ,SP.GiaBan FROM ChitietSP SP "
-                + "JOIN MauSac MS ON SP.IdMauSac = MS.Id "
-                + "JOIN KichCo KC ON SP.IdKC = KC.Id JOIN KhuyenMai KM ON SP.IdKM = KM.Id";
+        String sql = "SELECT SP.MA , s.Ten , MS.Ten AS N'Màu Sắc' ,KM.Giatrigiam  , KM.HinhthucKM , KC.Ten AS N'Kích Cỡ' , SP.SoLuongTon ,s.GiaBan FROM ChitietSP SP JOIN SanPham s on s.Id = SP.IdSP "
+                + "                JOIN MauSac MS ON SP.IdMauSac = MS.Id "
+                + "                JOIN KichCo KC ON SP.IdKC = KC.Id JOIN KhuyenMai KM ON SP.IdKM = KM.Id";
         Connection conn = DBConnection.openDbConnection();
         Statement stt = conn.createStatement();
 
@@ -90,6 +87,27 @@ public class SanPhamRepostory {
 
         }
         return idSP;
+    }
+
+    public SanPham getTenSP(int id) {
+
+        String sql = "select Ten from SanPham where Id = ?";
+        try {
+            Connection conn = DBConnection.openDbConnection();
+            PreparedStatement pr = conn.prepareStatement(sql);
+            pr.setInt(1, id);
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {
+                SanPham sp = new SanPham();
+                sp.setTen(rs.getString(1));
+
+                return sp;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+        return null;
     }
 
     public List<SanPham> seachSanPham(String Ten) {
@@ -202,7 +220,7 @@ public class SanPhamRepostory {
         }
 
     }
-    
+
     public List<SanPham> locTheoDanhMucSP(String TenDanhMuc) {
         List<SanPham> getListSP = new ArrayList<>();
         try {

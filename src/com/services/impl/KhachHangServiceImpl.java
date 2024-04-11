@@ -19,8 +19,8 @@ public class KhachHangServiceImpl implements IKhachHangService{
     private final KhachHangRepository khachHangRepository = new KhachHangRepository();
     
     @Override
-    public ArrayList<KhachHang> timKiem(String maKh) {
-        return khachHangRepository.getList(maKh);
+    public ArrayList<KhachHang> getAll() {
+        return khachHangRepository.getAll();
     }
 
     @Override

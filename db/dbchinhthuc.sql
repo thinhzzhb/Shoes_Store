@@ -1,8 +1,26 @@
 ﻿USE master
 GO
-CREATE DATABASE [DuAn1_shoes_store]
+CREATE DATABASE [Da1_Final]
 GO
-USE [DuAn1_shoes_store]
+USE [Da1_Final]
+/****** Object:  Table [dbo].[DanhMucSP]    Script Date: 4/10/2023 10:02:06 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SanPham](
+	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[Ten] [nvarchar](50) NOT NULL,
+	[GiaNhap] [decimal](20, 0) NULL,
+	[GiaBan] [decimal](20, 0) NULL,
+
+PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+
 /****** Object:  Table [dbo].[ChitietSP]    Script Date: 4/10/2023 10:02:06 PM ******/
 SET ANSI_NULLS ON
 GO
@@ -14,33 +32,17 @@ CREATE TABLE [dbo].[ChitietSP](
 	[Ten] [nvarchar](50) NOT NULL,
 	[IdNsx] [int] NULL,
 	[IdMauSac] [int] NULL,
-	[IdDMuc] [int] NULL,
+	[IdSP] [int] NULL,
 	[IdKC] [int] NULL,
 	[IdKM] [int] NULL,
 	[MoTa] [nvarchar](50) NULL,
 	[SoLuongTon] [int] NULL,
-	[GiaNhap] [decimal](20, 0) NULL,
-	[GiaBan] [decimal](20, 0) NULL,
 	[QrCode] [nvarchar](max) NULL,
 PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
-GO
-/****** Object:  Table [dbo].[DanhMucSP]    Script Date: 4/10/2023 10:02:06 PM ******/
-SET ANSI_NULLS ON
-GO
-SET QUOTED_IDENTIFIER ON
-GO
-CREATE TABLE [dbo].[DanhMucSP](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[Ten] [nvarchar](50) NOT NULL,
-PRIMARY KEY CLUSTERED 
-(
-	[Id] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
-) ON [PRIMARY]
 GO
 /****** Object:  Table [dbo].[HoaDon]    Script Date: 4/10/2023 10:02:06 PM ******/
 SET ANSI_NULLS ON
@@ -87,6 +89,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[KhachHang](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[MaKH] [nchar](10),
+	[DiaChi][nvarchar](max),
 	[Ten] [nvarchar](30) NOT NULL,
 	[TenDem] [nvarchar](30) NULL,
 	[Ho] [nvarchar](30) NULL,
@@ -169,6 +173,8 @@ SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[Users](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
+	[MaNV][nchar](10),
+	[DiaChi][nvarchar](max),
 	[Ten] [nvarchar](30) NOT NULL,
 	[TenDem] [nvarchar](30) NULL,
 	[Ho] [nvarchar](30) NULL,
@@ -188,22 +194,24 @@ PRIMARY KEY CLUSTERED
 GO
 SET IDENTITY_INSERT [dbo].[ChitietSP] ON 
 
-INSERT [dbo].[ChitietSP] ([Id], [Ma], [Ten], [IdNsx], [IdMauSac], [IdDMuc], [IdKC], [IdKM], [MoTa], [SoLuongTon], [GiaNhap], [GiaBan], [QrCode]) VALUES (1, N'SP01', N'Nike Air Zoom Pegasus', 1, 1, 1, 1, 1, N'giày hot 2022', 17, CAST(199000 AS Decimal(20, 0)), CAST(300000 AS Decimal(20, 0)), N'678526354211')
-INSERT [dbo].[ChitietSP] ([Id], [Ma], [Ten], [IdNsx], [IdMauSac], [IdDMuc], [IdKC], [IdKM], [MoTa], [SoLuongTon], [GiaNhap], [GiaBan], [QrCode]) VALUES (2, N'SP02', N'Giày thể thao nhẹ', 4, 2, 1, 9, 1, N'không có', 37, CAST(350000 AS Decimal(20, 0)), CAST(400000 AS Decimal(20, 0)), N'799488870335')
-INSERT [dbo].[ChitietSP] ([Id], [Ma], [Ten], [IdNsx], [IdMauSac], [IdDMuc], [IdKC], [IdKM], [MoTa], [SoLuongTon], [GiaNhap], [GiaBan], [QrCode]) VALUES (3, N'SP03', N'Giày gym hot ', 9, 8, 2, 12, 1, N'không có', 85, CAST(450000 AS Decimal(20, 0)), CAST(600000 AS Decimal(20, 0)), N'550098290613')
+INSERT [dbo].[ChitietSP] ([Id], [Ma], [Ten], [IdNsx], [IdMauSac], [IdSP], [IdKC], [IdKM], [MoTa], [SoLuongTon], [QrCode]) VALUES (1, N'SP01', N'Nike Air Zoom Pegasus', 1, 1, 1, 1, 1, N'giày hot 2022', 17,  N'678526354211')
+INSERT [dbo].[ChitietSP] ([Id], [Ma], [Ten], [IdNsx], [IdMauSac], [IdSP], [IdKC], [IdKM], [MoTa], [SoLuongTon], [QrCode]) VALUES (2, N'SP02', N'Giày thể thao nhẹ', 4, 2, 1, 9, 1, N'không có', 37, N'799488870335')
+INSERT [dbo].[ChitietSP] ([Id], [Ma], [Ten], [IdNsx], [IdMauSac], [IdSP], [IdKC], [IdKM], [MoTa], [SoLuongTon], [QrCode]) VALUES (3, N'SP03', N'Giày gym hot ', 9, 8, 2, 12, 1, N'không có', 85, N'550098290613')
 SET IDENTITY_INSERT [dbo].[ChitietSP] OFF
 GO
-SET IDENTITY_INSERT [dbo].[DanhMucSP] ON 
 
-INSERT [dbo].[DanhMucSP] ([Id], [Ten]) VALUES (1, N'Giày chạy bộ ')
-INSERT [dbo].[DanhMucSP] ([Id], [Ten]) VALUES (2, N'Giày tập gym ')
-INSERT [dbo].[DanhMucSP] ([Id], [Ten]) VALUES (4, N'Giày đá banh ')
-INSERT [dbo].[DanhMucSP] ([Id], [Ten]) VALUES (5, N'Giày đi bộ')
-INSERT [dbo].[DanhMucSP] ([Id], [Ten]) VALUES (6, N'Giày leo núi ')
-INSERT [dbo].[DanhMucSP] ([Id], [Ten]) VALUES (8, N'Giày thể thao đa năng ')
-INSERT [dbo].[DanhMucSP] ([Id], [Ten]) VALUES (9, N'Giày golf ')
-SET IDENTITY_INSERT [dbo].[DanhMucSP] OFF
+SET IDENTITY_INSERT [dbo].[SanPham] ON 
+
+INSERT [dbo].[SanPham] ([Id], [Ten], [GiaNhap], [GiaBan]) VALUES (1, N'Giày Nike ', CAST(199000 AS Decimal(20, 0)), CAST(300000 AS Decimal(20, 0)))
+INSERT [dbo].[SanPham] ([Id], [Ten], [GiaNhap], [GiaBan]) VALUES (2, N'Giày Adidas ', CAST(200000 AS Decimal(20, 0)), CAST(400000 AS Decimal(20, 0)))
+INSERT [dbo].[SanPham] ([Id], [Ten], [GiaNhap], [GiaBan]) VALUES (4, N'Giày Puma ', CAST(350000 AS Decimal(20, 0)), CAST(500000 AS Decimal(20, 0)))
+INSERT [dbo].[SanPham] ([Id], [Ten], [GiaNhap], [GiaBan]) VALUES (5, N'Giày Bitis', CAST(149000 AS Decimal(20, 0)), CAST(200000 AS Decimal(20, 0)))
+INSERT [dbo].[SanPham] ([Id], [Ten], [GiaNhap], [GiaBan]) VALUES (6, N'Giày The Bad ', CAST(99000 AS Decimal(20, 0)), CAST(100000 AS Decimal(20, 0)))
+INSERT [dbo].[SanPham] ([Id], [Ten], [GiaNhap], [GiaBan]) VALUES (8, N'Giày thể thao đa năng ', CAST(199000 AS Decimal(20, 0)), CAST(250000 AS Decimal(20, 0)))
+INSERT [dbo].[SanPham] ([Id], [Ten], [GiaNhap], [GiaBan]) VALUES (9, N'Giày golf ', CAST(199000 AS Decimal(20, 0)), CAST(300000 AS Decimal(20, 0)))
+SET IDENTITY_INSERT [dbo].[SanPham] OFF
 GO
+
 SET IDENTITY_INSERT [dbo].[HoaDon] ON 
 
 INSERT [dbo].[HoaDon] ([Id], [IdKH], [IdNV], [Ma], [NgayTao], [NgayThanhToan], [TinhTrang], [Ghichu], [TongTien]) VALUES (4, 4, 1, N'HD-379816004', CAST(N'2023-04-10T21:49:08.637' AS DateTime), CAST(N'2023-04-10' AS Date), 1, N'', CAST(2280000 AS Decimal(18, 0)))
@@ -211,6 +219,7 @@ INSERT [dbo].[HoaDon] ([Id], [IdKH], [IdNV], [Ma], [NgayTao], [NgayThanhToan], [
 INSERT [dbo].[HoaDon] ([Id], [IdKH], [IdNV], [Ma], [NgayTao], [NgayThanhToan], [TinhTrang], [Ghichu], [TongTien]) VALUES (6, 1, 1, N'HD-240915134', CAST(N'2023-04-10T21:58:43.613' AS DateTime), CAST(N'2023-04-10' AS Date), 1, N'', CAST(860000 AS Decimal(18, 0)))
 SET IDENTITY_INSERT [dbo].[HoaDon] OFF
 GO
+
 INSERT [dbo].[HoaDonChiTiet] ([IdHD], [IdCTSP], [Soluong], [Dongia]) VALUES (4, 1, 2, CAST(300000 AS Decimal(18, 0)))
 INSERT [dbo].[HoaDonChiTiet] ([IdHD], [IdCTSP], [Soluong], [Dongia]) VALUES (4, 2, 3, CAST(400000 AS Decimal(18, 0)))
 INSERT [dbo].[HoaDonChiTiet] ([IdHD], [IdCTSP], [Soluong], [Dongia]) VALUES (4, 3, 1, CAST(600000 AS Decimal(18, 0)))
@@ -220,9 +229,9 @@ INSERT [dbo].[HoaDonChiTiet] ([IdHD], [IdCTSP], [Soluong], [Dongia]) VALUES (6, 
 GO
 SET IDENTITY_INSERT [dbo].[KhachHang] ON 
 
-INSERT [dbo].[KhachHang] ([Id], [Ten], [TenDem], [Ho], [Gioitinh], [NgaySinh], [Email], [Sdt], [Diemthuong]) VALUES (1, N'Thể', N'Văn', N'Nguyễn', 0, CAST(N'2001-09-08' AS Date), N'hevnhhahaa@gmail.com', N'09786664432', 0)
-INSERT [dbo].[KhachHang] ([Id], [Ten], [TenDem], [Ho], [Gioitinh], [NgaySinh], [Email], [Sdt], [Diemthuong]) VALUES (2, N'Đức', N'Văn', N'Nguyễn', 0, CAST(N'2000-09-08' AS Date), N'thenvhahaha09022@gmail.com', N'0967233115', 0)
-INSERT [dbo].[KhachHang] ([Id], [Ten], [TenDem], [Ho], [Gioitinh], [NgaySinh], [Email], [Sdt], [Diemthuong]) VALUES (4, N'Huy', N'Văn', N'Nguyễn', 0, CAST(N'2005-09-08' AS Date), N'hungndph889977@gmail.com', N'0967233115', 0)
+INSERT [dbo].[KhachHang] ([Id], [MaKH], [DiaChi], [Ten], [TenDem], [Ho], [Gioitinh], [NgaySinh], [Email], [Sdt], [Diemthuong]) VALUES (1,N'KH01', N'Hà nội', N'Lê', N'Hồng', N'Thịnh', 0, CAST(N'2001-09-08' AS Date), N'dafuq412@gmail.com', N'09786664432', 0)
+INSERT [dbo].[KhachHang] ([Id], [MaKH], [DiaChi], [Ten], [TenDem], [Ho], [Gioitinh], [NgaySinh], [Email], [Sdt], [Diemthuong]) VALUES (2,N'KH02', N'Hà nội', N'Đức', N'Văn', N'Nguyễn', 0, CAST(N'2000-09-08' AS Date), N'thenvhahaha09022@gmail.com', N'0967233115', 0)
+INSERT [dbo].[KhachHang] ([Id], [MaKH], [DiaChi], [Ten], [TenDem], [Ho], [Gioitinh], [NgaySinh], [Email], [Sdt], [Diemthuong]) VALUES (4,N'KH03', N'Hà nội', N'Huy', N'Văn', N'Nguyễn', 0, CAST(N'2005-09-08' AS Date), N'hungndph889977@gmail.com', N'0967233115', 0)
 SET IDENTITY_INSERT [dbo].[KhachHang] OFF
 GO
 SET IDENTITY_INSERT [dbo].[KhuyenMai] ON 
@@ -294,10 +303,6 @@ ALTER TABLE [dbo].[HoaDon] ADD UNIQUE NONCLUSTERED
 GO
 ALTER TABLE [dbo].[ChitietSP] ADD  DEFAULT (NULL) FOR [MoTa]
 GO
-ALTER TABLE [dbo].[ChitietSP] ADD  DEFAULT ((0)) FOR [GiaNhap]
-GO
-ALTER TABLE [dbo].[ChitietSP] ADD  DEFAULT ((0)) FOR [GiaBan]
-GO
 ALTER TABLE [dbo].[ChitietSP] ADD  DEFAULT (NULL) FOR [QrCode]
 GO
 ALTER TABLE [dbo].[HoaDon] ADD  DEFAULT (NULL) FOR [NgayTao]
@@ -334,8 +339,8 @@ ALTER TABLE [dbo].[Users] ADD  DEFAULT (NULL) FOR [MatKhau]
 GO
 ALTER TABLE [dbo].[Users] ADD  DEFAULT ((0)) FOR [TrangThai]
 GO
-ALTER TABLE [dbo].[ChitietSP]  WITH CHECK ADD FOREIGN KEY([IdDMuc])
-REFERENCES [dbo].[DanhMucSP] ([Id])
+ALTER TABLE [dbo].[ChitietSP]  WITH CHECK ADD FOREIGN KEY([IdSP])
+REFERENCES [dbo].[SanPham] ([Id])
 GO
 ALTER TABLE [dbo].[ChitietSP]  WITH CHECK ADD FOREIGN KEY([IdKC])
 REFERENCES [dbo].[KichCo] ([Id])

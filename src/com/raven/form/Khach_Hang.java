@@ -6,6 +6,7 @@
 package com.raven.form;
 
 import com.Dto.KhachHangTable;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import com.models.KhachHang;
 import com.services.IKhachHangService;
 import com.services.impl.KhachHangServiceImpl;
@@ -29,16 +30,13 @@ public class Khach_Hang extends javax.swing.JPanel {
         
         initComponents();
         setOpaque(false);
-//        khachHangs = khachHangService.timKiem(null);
-//        khachHangs.add(new KhachHang(1, "KH001", "A", "Van", "Nguyen", "09888888","Ha Noi"));
-//        khachHangs.add(new KhachHang(2, "KH002", "B", "Van", "Nguyen", "09999999","Ha Noi"));
-        khachHangs = khachHangService.timKiem(null);
         loadTable();
         
     }
     
     private void loadTable(){
-        tblKhachHang.setModel(new KhachHangTable(khachHangs));
+        khachHangs = khachHangService.getAll();
+        tblKhachHang.setModel(khachHangs == null ? new KhachHangTable(new ArrayList<>()) : new KhachHangTable(khachHangs));
     }
 
     /** This method is called from within the constructor to
@@ -67,6 +65,8 @@ public class Khach_Hang extends javax.swing.JPanel {
         btnUpdate = new javax.swing.JButton();
         btnDelete = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
+        txtEmail = new javax.swing.JTextField();
         jPanel8 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblKhachHang = new javax.swing.JTable();
@@ -142,11 +142,19 @@ public class Khach_Hang extends javax.swing.JPanel {
 
         jButton4.setText("Mới");
 
+        jLabel6.setText("Email");
+
         javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jSeparator1)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel6)
+                    .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1))
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
@@ -190,9 +198,16 @@ public class Khach_Hang extends javax.swing.JPanel {
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(txtSDT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel7Layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(12, 12, 12)
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -291,7 +306,19 @@ public class Khach_Hang extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private boolean checkInput(){
+        return  txtMaKH.getText() == null||
+                txtDiaChi.getText() == null||
+                txtTenKH.getText() == null||
+                txtEmail.getText() == null||
+                txtSDT.getText() == null;
+    }
+    
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        if(checkInput()){
+            JOptionPane.showMessageDialog(this, "Chưa nhập đủ thông tin!");
+            return;
+        }
         KhachHang kh = new KhachHang();
         String[] hoTen = txtTenKH.getText().split(" ");
         String ho = null;
@@ -308,9 +335,18 @@ public class Khach_Hang extends javax.swing.JPanel {
         kh.setHo(ho);
         kh.setTenDem(tenDem);
         kh.setTen(name.toString());
+        kh.setMaKH(txtMaKH.getText());
         kh.setDiaChi(txtDiaChi.getText());
         kh.setSdt(txtSDT.getText());
-        khachHangService.add(kh);
+        kh.setEmail(txtEmail.getText());
+        try {
+            khachHangService.add(kh);
+            JOptionPane.showMessageDialog(this, "Thêm mới thành công");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Loi them moi");
+        }
+        
+        
         loadTable();
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -321,9 +357,11 @@ public class Khach_Hang extends javax.swing.JPanel {
             kh = khachHangs.get(chon);
 //            khachHangs.remove(kh);
             khachHangService.delete(kh.getId());
+            JOptionPane.showMessageDialog(this, "Xoa thành công");
         }
         else {
             JOptionPane.showMessageDialog(this, "Chưa chọn khách hàng muốn xóa");
+            return;
         }
         loadTable();
     }//GEN-LAST:event_btnDeleteActionPerformed
@@ -341,6 +379,7 @@ public class Khach_Hang extends javax.swing.JPanel {
             txtTenKH.setText(kh.getHo() + " " + kh.getTenDem() + " " + kh.getTen());
             txtDiaChi.setText(kh.getDiaChi());
             txtSDT.setText(kh.getSdt());
+            txtEmail.setText(kh.getEmail());
         }
     }//GEN-LAST:event_tblKhachHangMouseClicked
 
@@ -352,6 +391,7 @@ public class Khach_Hang extends javax.swing.JPanel {
         }
         else {
             JOptionPane.showMessageDialog(this, "Chưa chọn khách hàng muốn xóa");
+            return;
         }
         String[] hoTen = txtTenKH.getText().split(" ");
         String ho = null;
@@ -368,9 +408,12 @@ public class Khach_Hang extends javax.swing.JPanel {
         kh.setHo(ho);
         kh.setTenDem(tenDem);
         kh.setTen(name.toString());
+        kh.setMaKH(txtMaKH.getText());
         kh.setDiaChi(txtDiaChi.getText());
         kh.setSdt(txtSDT.getText());
+        kh.setEmail(txtEmail.getText());
         khachHangService.update(kh.getId(), kh);
+        JOptionPane.showMessageDialog(this, "Update thành công");
         loadTable();
         
     }//GEN-LAST:event_btnUpdateActionPerformed
@@ -387,6 +430,7 @@ public class Khach_Hang extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel7;
@@ -396,6 +440,7 @@ public class Khach_Hang extends javax.swing.JPanel {
     private javax.swing.JTextField jTextField5;
     private javax.swing.JTable tblKhachHang;
     private javax.swing.JTextField txtDiaChi;
+    private javax.swing.JTextField txtEmail;
     private javax.swing.JTextField txtMaKH;
     private javax.swing.JTextField txtSDT;
     private javax.swing.JTextField txtTenKH;

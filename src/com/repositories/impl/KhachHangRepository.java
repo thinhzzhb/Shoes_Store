@@ -18,26 +18,23 @@ import java.util.List;
  * @author tggdd
  */
 public class KhachHangRepository {
-    public ArrayList<KhachHang> getList(String maKh) {
-        String query = "SELECT * FROM KHACHHANG k WHERE k.MAKH like %?%";
-        if(maKh == "")
-            query = "SELECT * FROM KHACHHANG ";
+    public ArrayList<KhachHang> getAll() {
+        String query = "SELECT * FROM KHACHHANG ";
         try{
             Connection con = (Connection) DBConnection.openDbConnection();  
             PreparedStatement ps = con.prepareStatement(query);
-            if(maKh != "")
-                ps.setString(1, maKh);
             ResultSet rs = ps.executeQuery();
             ArrayList<KhachHang> listKH = new ArrayList<>();
             while (rs.next()) {
                 KhachHang kh = new KhachHang();
-                kh.setId(rs.getInt(1));
-                kh.setTen(rs.getString(2));
-                kh.setTenDem(rs.getString(3));
-                kh.setHo(rs.getString(4));
-                kh.setDiaChi(rs.getString(11));
-                kh.setSdt(rs.getString(8));
-                kh.setMaKH(rs.getString(10));
+                kh.setId(rs.getInt("Id"));
+                kh.setTen(rs.getString("Ten"));
+                kh.setTenDem(rs.getString("TenDem"));
+                kh.setHo(rs.getString("Ho"));
+                kh.setDiaChi(rs.getString("DiaChi"));
+                kh.setSdt(rs.getString("Sdt"));
+                kh.setMaKH(rs.getString("MaKH"));
+                kh.setEmail(rs.getString("Email"));
                 listKH.add(kh);
             }
             return listKH;
@@ -51,14 +48,8 @@ public class KhachHangRepository {
     public void save(KhachHang kh){
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO ")
-                .append("KhachHang ")
-                .append("VALUES(? ,? ,? , ")
-                .append(0)
-                .append(", '2001-09-08' ")
-                .append(", 'test@gmail.com' ")
-                .append(", ? , ")
-                .append(0)
-                .append(" ,? , ?)");
+                .append("KhachHang(Ten,TenDem,Ho,Sdt,MaKH,DiaChi,Email) ")
+                .append("VALUES(? , ? , ? , ? , ? , ?, ?)");
         try{
             Connection con = (Connection) DBConnection.openDbConnection();  
             PreparedStatement ps = con.prepareStatement(query.toString());
@@ -68,6 +59,7 @@ public class KhachHangRepository {
             ps.setString(4,kh.getSdt());
             ps.setString(5,kh.getMaKH());
             ps.setString(6,kh.getDiaChi());
+            ps.setString(7,kh.getEmail());
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace(System.out);
@@ -77,15 +69,16 @@ public class KhachHangRepository {
     
     public void update(Integer id, KhachHang kh){
         StringBuilder query = new StringBuilder();
-        query.append("UPDATE KhangHang SET ")
+        query.append("UPDATE KhachHang SET ")
                 .append(" Ten = ? ,")
                 .append(" TenDem = ? ,")
                 .append(" Ho = ? ,")
                 .append(" Sdt = ? ,")
                 .append(" MaKH = ? ,")
-                .append(" DiaChi = ? ")
+                .append(" DiaChi = ? ,")
+                .append(" Email = ?")
                 .append(" WHERE ")
-                .append(" id = ?");
+                .append(" Id = ?");
         try{
             Connection con = (Connection) DBConnection.openDbConnection();  
             PreparedStatement ps = con.prepareStatement(query.toString());
@@ -95,7 +88,8 @@ public class KhachHangRepository {
             ps.setString(4,kh.getSdt());
             ps.setString(5,kh.getMaKH());
             ps.setString(6,kh.getDiaChi());
-            ps.setInt(7,id);
+            ps.setString(7,kh.getEmail());
+            ps.setInt(8,id);
             ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace(System.out);

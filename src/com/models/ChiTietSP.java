@@ -12,7 +12,6 @@ import java.math.BigDecimal;
  */
 public class ChiTietSP {
     private String ma;
-    private String ten;
     private int idNsx;
     private int idMauSac;
     private int idDanhMuc;
@@ -20,16 +19,13 @@ public class ChiTietSP {
     private int idKhuyenMai;
     private int soLuongTon;
     private String moTa;
-    private Double giaBan;
-    private Double giaNhap;
     private String qrCode;
 
     public ChiTietSP() {
     }
 
-    public ChiTietSP(String ma, String ten, int idNsx, int idMauSac, int idDanhMuc, int idKichCo, int idKhuyenMai, int soLuongTon, String moTa, Double giaBan, Double giaNhap, String qrCode) {
+    public ChiTietSP(String ma, int idNsx, int idMauSac, int idDanhMuc, int idKichCo, int idKhuyenMai, int soLuongTon, String moTa, String qrCode) {
         this.ma = ma;
-        this.ten = ten;
         this.idNsx = idNsx;
         this.idMauSac = idMauSac;
         this.idDanhMuc = idDanhMuc;
@@ -37,8 +33,6 @@ public class ChiTietSP {
         this.idKhuyenMai = idKhuyenMai;
         this.soLuongTon = soLuongTon;
         this.moTa = moTa;
-        this.giaBan = giaBan;
-        this.giaNhap = giaNhap;
         this.qrCode = qrCode;
     }
 
@@ -48,14 +42,6 @@ public class ChiTietSP {
 
     public void setMa(String ma) {
         this.ma = ma;
-    }
-
-    public String getTen() {
-        return ten;
-    }
-
-    public void setTen(String ten) {
-        this.ten = ten;
     }
 
     public int getIdNsx() {
@@ -114,22 +100,6 @@ public class ChiTietSP {
         this.moTa = moTa;
     }
 
-    public Double getGiaBan() {
-        return giaBan;
-    }
-
-    public void setGiaBan(Double giaBan) {
-        this.giaBan = giaBan;
-    }
-
-    public Double getGiaNhap() {
-        return giaNhap;
-    }
-
-    public void setGiaNhap(Double giaNhap) {
-        this.giaNhap = giaNhap;
-    }
-
     public String getQrCode() {
         return qrCode;
     }
@@ -140,7 +110,7 @@ public class ChiTietSP {
 
     @Override
     public String toString() {
-        return ten;
+        return ma;
     }
 
     

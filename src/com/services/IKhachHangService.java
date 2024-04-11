@@ -12,7 +12,7 @@ import java.util.ArrayList;
  * @author tggdd
  */
 public interface IKhachHangService {
-    ArrayList<KhachHang> timKiem(String maKh);
+    ArrayList<KhachHang> getAll();
     void add(KhachHang khachHang);
     void update(Integer id, KhachHang khachHang);
     void delete(Integer id);

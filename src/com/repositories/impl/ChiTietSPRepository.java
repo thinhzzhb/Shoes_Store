@@ -24,14 +24,14 @@ import java.util.logging.Logger;
  * @author user
  */
 public class ChiTietSPRepository implements IChiTietSPRepository{
-    final String SQL_SELECT_ALL = "SELECT Ma,Ten,IdNsx,IdMauSac,IdDMuc,IdKC,IdKM,SoLuongTon,MoTa,GiaNhap,GiaBan,QrCode FROM dbo.ChitietSP WHERE SoLuongTon > 0";
-    final String SQL_SELECT_BY_MA = "SELECT Ma,Ten,IdNsx,IdMauSac,IdDMuc,IdKC,IdKM,SoLuongTon,MoTa,GiaNhap,GiaBan,QrCode FROM dbo.ChitietSP WHERE Ma = ?";
-    final String SQL_SELECT_BY_SL = "SELECT Ma,Ten,IdNsx,IdMauSac,IdDMuc,IdKC,IdKM,SoLuongTon,MoTa,GiaNhap,GiaBan,QrCode FROM dbo.ChitietSP WHERE SoLuongTon = 0";
-    final String SQL_SELECT_BY_TEN = "SELECT Ma,Ten,IdNsx,IdMauSac,IdDMuc,IdKC,IdKM,SoLuongTon,MoTa,GiaNhap,GiaBan,QrCode FROM dbo.ChitietSP WHERE SoLuongTon > 0 AND ten LIKE ?";
-    final String SQL_INSERT = "INSERT INTO dbo.ChitietSP\n"
-            + "( Ma, Ten, IdNsx, IdMauSac, IdDMuc, IdKC,IdKM, SoLuongTon, MoTa, GiaNhap, GiaBan, QrCode)\n"
-            + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?)";
-    final String SQL_UPDATE = "UPDATE dbo.ChitietSP SET Ma = ?, Ten = ?, IdNsx = ?, IdMauSac = ?, IdDMuc = ?, IdKC = ?, MoTa = ?, SoLuongTon = ?, GiaNhap = ?, GiaBan = ? WHERE Ma = ?";
+    final String SQL_SELECT_ALL = "SELECT Ma, IdNsx, IdMauSac, IdSP, IdKC, IdKM, SoLuongTon, MoTa, QrCode FROM dbo.ChitietSP WHERE SoLuongTon > 0";
+    final String SQL_SELECT_BY_MA = "SELECT Ma, IdNsx, IdMauSac, IdSP, IdKC, IdKM, SoLuongTon, MoTa, QrCode FROM dbo.ChitietSP WHERE Ma = ?";
+    final String SQL_SELECT_BY_SL = "SELECT Ma, IdNsx, IdMauSac, IdSP, IdKC, IdKM, SoLuongTon, MoTa, QrCode FROM dbo.ChitietSP WHERE SoLuongTon = 0";
+    final String SQL_SELECT_BY_TEN = "SELECT Ma, IdNsx, IdMauSac, IdSP, IdKC, IdKM, SoLuongTon, MoTa, QrCode FROM dbo.ChitietSP WHERE SoLuongTon > 0 AND ten LIKE ?";
+    final String SQL_INSERT = "INSERT INTO dbo.ChitietSP "
+            + "( Ma, IdNsx, IdMauSac, IdSP, IdKC, IdKM, SoLuongTon, MoTa, QrCode) "
+            + "VALUES(?,?,?,?,?,?,?,?,?)";
+    final String SQL_UPDATE = "UPDATE dbo.ChitietSP SET Ma = ?, IdNsx = ?, IdMauSac = ?, IdSP = ?, IdKC = ?, MoTa = ?, SoLuongTon = ? WHERE Ma = ?";
     final String SQL_DELETE = "DELETE dbo.ChitietSP WHERE Ma = ?";
 
     @Override
@@ -49,9 +49,9 @@ public class ChiTietSPRepository implements IChiTietSPRepository{
         try {
             ResultSet rl = DBConnection.getDataFromQuery(SQL, arvg);
             while (rl.next()) {
-                lst.add(new ChiTietSP(rl.getNString(1), rl.getNString(2),rl.getInt(3) ,
-                        rl.getInt(4) , rl.getInt(5), rl.getInt(6), rl.getInt(7), rl.getInt(8),
-                        rl.getNString(9), rl.getDouble(10), rl.getDouble(11), rl.getNString(12)));
+                lst.add(new ChiTietSP(rl.getNString(1), rl.getInt(2) ,
+                        rl.getInt(3) , rl.getInt(4), rl.getInt(5), rl.getInt(6), rl.getInt(7),
+                        rl.getNString(8), rl.getNString(9)));
 
             }
         } catch (SQLException ex) {
@@ -63,12 +63,12 @@ public class ChiTietSPRepository implements IChiTietSPRepository{
 
     @Override
     public int insert(ChiTietSP x) {
-        return DBConnection.ExcuteQuery(SQL_INSERT, x.getMa(), x.getTen(), x.getIdNsx(), x.getIdMauSac(), x.getIdDanhMuc(), x.getIdKichCo(),1,   x.getSoLuongTon(),x.getMoTa(), x.getGiaNhap(), x.getGiaBan(), x.getQrCode());
+        return DBConnection.ExcuteQuery(SQL_INSERT, x.getMa(), x.getIdNsx(), x.getIdMauSac(), x.getIdDanhMuc(), x.getIdKichCo(),1,   x.getSoLuongTon(),x.getMoTa(), x.getQrCode());
     }
 
     @Override
     public int update(ChiTietSP x, String Ma) {
-        return DBConnection.ExcuteQuery(SQL_UPDATE, x.getMa(), x.getTen(), x.getIdNsx(), x.getIdMauSac(), x.getIdDanhMuc(), x.getIdKichCo(), x.getMoTa(), x.getSoLuongTon(), x.getGiaNhap(), x.getGiaBan(), Ma);
+        return DBConnection.ExcuteQuery(SQL_UPDATE, x.getMa(), x.getIdNsx(), x.getIdMauSac(), x.getIdDanhMuc(), x.getIdKichCo(), x.getMoTa(), x.getSoLuongTon(), Ma);
     }
 
     @Override
@@ -129,14 +129,13 @@ public class ChiTietSPRepository implements IChiTietSPRepository{
     public List<ChiTietSP> GetAll() {
         try {
             List<ChiTietSP> lst = new ArrayList<>();
-            String sql = "Select Ma,Ten from ChitietSP";
+            String sql = "Select Ma from ChitietSP";
             Connection conn = DBConnection.openDbConnection();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 ChiTietSP sP = new ChiTietSP();
                 sP.setMa(rs.getString(1));
-                sP.setTen(rs.getString(2));
                 lst.add(sP);
             }
             return lst;

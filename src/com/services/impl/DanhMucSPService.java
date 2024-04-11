@@ -8,7 +8,7 @@ import com.models.DanhMucSP;
 import com.repositories.IDanhMucSPRepository;
 import com.repositories.impl.DanhMucSPRepository;
 import com.services.IDanhMucSPService;
-import com.viewModel.Objecttt;
+import com.viewModel.objectSp;
 import java.util.List;
 
 /**
@@ -24,8 +24,8 @@ public class DanhMucSPService implements IDanhMucSPService{
     }
 
     @Override
-    public String Add(Objecttt x) {
-        DanhMucSP danhmuc = new DanhMucSP(x.getId(), x.getTen());
+    public String Add(objectSp x) {
+        DanhMucSP danhmuc = new DanhMucSP(x.getId(), x.getTen(), x.getGiaNhap(), x.getGiaBan());
         int them = danhMucSPRepository.insert(danhmuc);
         if (them == 1) {
             return "Thành công";
@@ -34,8 +34,8 @@ public class DanhMucSPService implements IDanhMucSPService{
     }
 
     @Override
-    public String Update(Objecttt x, int id) {
-        DanhMucSP danhmuc = new DanhMucSP(x.getId(), x.getTen());
+    public String Update(objectSp x, int id) {
+        DanhMucSP danhmuc = new DanhMucSP(x.getId(), x.getTen(), x.getGiaNhap(), x.getGiaBan());
         int sua = danhMucSPRepository.update(danhmuc, id);
         if (sua == 1) {
             return "Thành công";

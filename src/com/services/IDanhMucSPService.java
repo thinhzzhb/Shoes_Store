@@ -5,7 +5,7 @@
 package com.services;
 
 import com.models.DanhMucSP;
-import com.viewModel.Objecttt;
+import com.viewModel.objectSp;
 import java.util.List;
 
 /**
@@ -15,9 +15,9 @@ import java.util.List;
 public interface IDanhMucSPService {
     List<DanhMucSP> getAll();
 
-    String Add(Objecttt x);
+    String Add(objectSp x);
 
-    String Update(Objecttt x, int id);
+    String Update(objectSp x, int id);
 
     String Delete(int id);
 

@@ -11,7 +11,7 @@ package com.viewModel;
 public class Objecttt {
     private int id;
     private String ten;
-
+    
     public Objecttt() {
     }
 
@@ -35,4 +35,6 @@ public class Objecttt {
     public void setTen(String ten) {
         this.ten = ten;
     }
+
+   
 }

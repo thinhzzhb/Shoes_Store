@@ -4,8 +4,11 @@
  */
 package com.raven.form;
 
+import com.models.SanPham;
 import com.services.IHoaDonService;
+import com.services.ISanPhamService;
 import com.services.impl.HoaDonService;
+import com.services.impl.SanPhamService;
 import com.viewModel.HoaDonChiTietViewModel;
 import com.viewModel.HoaDonViewModel;
 import java.text.SimpleDateFormat;
@@ -22,6 +25,7 @@ public class Lich_su extends javax.swing.JPanel {
     /**
      * Creates new form San_Pham
      */
+    private ISanPhamService spser = new SanPhamService();
     private DefaultTableModel _dtmHD;
     private IHoaDonService service;
 
@@ -39,7 +43,7 @@ public class Lich_su extends javax.swing.JPanel {
         for (HoaDonViewModel h : _listHoaDon) {
             _dtmHD.addRow(new Object[]{
                 h.getMa(),
-               (h.getKh() != null) ? h.getKh().getTen() : "",
+                (h.getKh() != null) ? h.getKh().getTen() : "",
                 h.getUs().getTen(),
                 h.getNgayTaoAsString(),
                 h.getNgayThanhToan(),
@@ -245,19 +249,22 @@ public class Lich_su extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
-    
-    
+
     private void tblHoaDonMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonMouseClicked
         // TODO add your handling code here:
         int row = tblHoaDon.getSelectedRow();
         _dtmHD = (DefaultTableModel) tblHoaDonCT.getModel();
         _dtmHD.setRowCount(0);
+
         List<HoaDonChiTietViewModel> _listHDCT = service.getHDCT(tblHoaDon.getValueAt(row, 0).toString());
         for (HoaDonChiTietViewModel CT : _listHDCT) {
+            int idSP = Integer.parseInt(CT.getSanPham().getTen());
+            SanPham s = spser.getTenSanPham(idSP);
+            String tenSP = s.getTen();
             _dtmHD.addRow(new Object[]{
                 CT.getHoaDon().getMa(),
                 CT.getSanPham().getMa(),
-                CT.getSanPham().getTen(),
+                tenSP,
                 CT.getSoluong(),
                 CT.getDonGia(),
                 CT.getThanhTien()});
@@ -274,7 +281,7 @@ public class Lich_su extends javax.swing.JPanel {
         TimKiemHoaDonTheoTT();
     }//GEN-LAST:event_cbbTrangThaiActionPerformed
 
-    public void timTheoNgayThanhToan(){
+    public void timTheoNgayThanhToan() {
         if (txtDate_NgayTT.getDate() != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             String date3 = sdf.format(txtDate_NgayTT.getDate());
@@ -311,7 +318,7 @@ public class Lich_su extends javax.swing.JPanel {
 
     private void tblHoaDonCTMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblHoaDonCTMouseClicked
         // TODO add your handling code here:
-        
+
     }//GEN-LAST:event_tblHoaDonCTMouseClicked
 
 

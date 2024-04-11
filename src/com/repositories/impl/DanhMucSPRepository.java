@@ -19,11 +19,11 @@ import java.util.logging.Logger;
  * @author user
  */
 public class DanhMucSPRepository implements IDanhMucSPRepository{
-    final String SQL_SELECT_ALL = "SELECT Id,Ten FROM dbo.DanhMucSP";
-    final String SQL_SELECT_BY_ID = "SELECT Id,Ten FROM dbo.DanhMucSP WHERE Id = ?";
-    final String SQL_INSERT = "INSERT INTO dbo.DanhMucSP(Ten) VALUES(?)";
-    final String SQL_UPDATE = "UPDATE dbo.DanhMucSP SET Ten = ? WHERE Id = ?";
-    final String SQL_DELETE = "DELETE dbo.DanhMucSP WHERE Id = ?";
+    final String SQL_SELECT_ALL = "SELECT Id, Ten, GiaNhap, GiaBan FROM dbo.SanPham";
+    final String SQL_SELECT_BY_ID = "SELECT Id, Ten, GiaNhap, GiaBan FROM dbo.SanPham WHERE Id = ?";
+    final String SQL_INSERT = "INSERT INTO dbo.SanPham(Ten, GiaNhap, GiaBan) VALUES(?,?,?)";
+    final String SQL_UPDATE = "UPDATE dbo.SanPham SET Ten = ?, GiaNhap = ?, GiaBan = ? WHERE Id = ?";
+    final String SQL_DELETE = "DELETE dbo.SanPham WHERE Id = ?";
 
     @Override
     public List<DanhMucSP> getAll() {
@@ -35,13 +35,13 @@ public class DanhMucSPRepository implements IDanhMucSPRepository{
     @Override
     public int insert(DanhMucSP x) {
 
-        return DBConnection.ExcuteQuery(SQL_INSERT, x.getTen());
+        return DBConnection.ExcuteQuery(SQL_INSERT, x.getTen(),x.getGiaNhap(),x.getGiaBan());
 
     }
 
     @Override
     public int update(DanhMucSP dmsp, int id) {
-        return DBConnection.ExcuteQuery(SQL_UPDATE, dmsp.getTen(), id);
+        return DBConnection.ExcuteQuery(SQL_UPDATE, dmsp.getTen(), dmsp.getGiaNhap(), dmsp.getGiaBan(), id);
     }
 
     @Override
@@ -62,7 +62,7 @@ public class DanhMucSPRepository implements IDanhMucSPRepository{
         try {
             ResultSet rl = DBConnection.getDataFromQuery(SQL, arvg);
             while (rl.next()) {
-                lst.add(new DanhMucSP((int) rl.getObject(1), (String) rl.getObject(2)));
+                lst.add(new DanhMucSP((int) rl.getObject(1), (String) rl.getObject(2), (double) rl.getDouble(3), rl.getDouble(4)));
             }
 
         } catch (SQLException ex) {

@@ -6,6 +6,7 @@ package com.repositories.impl;
 
 import com.helper.DBConnection;
 import com.models.ChiTietSP;
+import com.models.SanPham;
 import com.models.ThongKe;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -139,17 +140,17 @@ public class ThongKeRepository {
 
     public List<ThongKe> getspday(String date) {
         lst.removeAll(lst);
-        String sql = "select a.Ten,Sum(b.Soluong) as 'đã bán được' from ChitietSP a join HoaDonChiTiet b on a.Id=b.IdCTSP JOIN HOADON c ON b.IDHD=c.ID "
-                + "join KhuyenMai d on a.IdKM =d.Id where c.TinhTrang =1 AND DAY(NGAYTHANHTOAN) = ? AND MONTH(NGAYTHANHTOAN) = MONTH(GETDATE()) AND YEAR(NGAYTHANHTOAN)=YEAR(GETDATE()) group by a.Ten order by Sum(b.Soluong) desc";
+        String sql = "select s.Ten,Sum(b.Soluong) as 'đã bán được' from ChitietSP a join HoaDonChiTiet b on a.Id=b.IdCTSP JOIN HOADON c ON b.IDHD=c.ID join SanPham s on s.Id = a.IdSP "
+                + "join KhuyenMai d on a.IdKM =d.Id where c.TinhTrang =1 AND DAY(NGAYTHANHTOAN) = ? AND MONTH(NGAYTHANHTOAN) = MONTH(GETDATE()) AND YEAR(NGAYTHANHTOAN)=YEAR(GETDATE()) group by s.Ten order by Sum(b.Soluong) desc";
         try {
             Connection conn = DBConnection.openDbConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, date);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                ChiTietSP chiTietSP = new ChiTietSP();
-                chiTietSP.setTen(rs.getString(1));
-                lst.add(new ThongKe(rs.getInt(2), chiTietSP));
+                SanPham sp = new SanPham();
+                sp.setTen(rs.getString(1));
+                lst.add(new ThongKe(rs.getInt(2), sp));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -160,17 +161,17 @@ public class ThongKeRepository {
 
     public List<ThongKe> getspmonth(String date) {
         lst.removeAll(lst);
-        String sql = "select a.Ten,Sum(b.Soluong) as 'đã bán được' from ChitietSP a join HoaDonChiTiet b on a.Id=b.IdCTSP JOIN HOADON c ON b.IDHD=c.ID "
-                + "join KhuyenMai d on a.IdKM =d.Id where c.TinhTrang =1 AND MONTH(NGAYTHANHTOAN) = ? AND YEAR(NGAYTHANHTOAN) = YEAR(GETDATE()) group by a.Ten order by Sum(b.Soluong) desc";
+        String sql = "select s.Ten,Sum(b.Soluong) as 'đã bán được' from ChitietSP a join HoaDonChiTiet b on a.Id=b.IdCTSP JOIN HOADON c ON b.IDHD=c.ID join SanPham s on s.Id = a.IdSP "
+                + "join KhuyenMai d on a.IdKM =d.Id where c.TinhTrang =1 AND MONTH(NGAYTHANHTOAN) = ? AND YEAR(NGAYTHANHTOAN) = YEAR(GETDATE()) group by s.Ten order by Sum(b.Soluong) desc";
         try {
             Connection conn = DBConnection.openDbConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, date);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                ChiTietSP chiTietSP = new ChiTietSP();
-                chiTietSP.setTen(rs.getString(1));
-                lst.add(new ThongKe(rs.getInt(2), chiTietSP));
+                SanPham sp = new SanPham();
+                sp.setTen(rs.getString(1));
+                lst.add(new ThongKe(rs.getInt(2), sp));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -181,17 +182,17 @@ public class ThongKeRepository {
 
     public List<ThongKe> getspyear(String date) {
         lst.removeAll(lst);
-        String sql = "select a.Ten,Sum(b.Soluong) as 'đã bán được' from ChitietSP a join HoaDonChiTiet b on a.Id=b.IdCTSP JOIN HOADON c ON b.IDHD=c.ID "
-                + "join KhuyenMai d on a.IdKM =d.Id where c.TinhTrang =1 AND YEAR(NGAYTHANHTOAN) = ? group by a.Ten order by Sum(b.Soluong) desc";
+        String sql = "select s.Ten,Sum(b.Soluong) as 'đã bán được' from ChitietSP a join HoaDonChiTiet b on a.Id=b.IdCTSP JOIN HOADON c ON b.IDHD=c.ID join SanPham s on s.Id = a.IdSP "
+                + "join KhuyenMai d on a.IdKM =d.Id where c.TinhTrang =1 AND YEAR(NGAYTHANHTOAN) = ? group by s.Ten order by Sum(b.Soluong) desc";
         try {
             Connection conn = DBConnection.openDbConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setString(1, date);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                ChiTietSP chiTietSP = new ChiTietSP();
-                chiTietSP.setTen(rs.getString(1));
-                lst.add(new ThongKe(rs.getInt(2), chiTietSP));
+                SanPham sp = new SanPham();
+                sp.setTen(rs.getString(1));
+                lst.add(new ThongKe(rs.getInt(2), sp));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -253,16 +254,16 @@ public class ThongKeRepository {
 
     public List<ThongKe> getsp() {
         lst.removeAll(lst);
-        String sql = "select a.Ten,Sum(b.Soluong) as 'đã bán được' from ChitietSP a join HoaDonChiTiet b on a.Id=b.IdCTSP JOIN HOADON c ON b.IDHD=c.ID "
-                + "join KhuyenMai d on a.IdKM =d.Id where c.TinhTrang =1 AND DAY(NGAYTHANHTOAN) = DAY(GETDATE()) group by a.Ten order by Sum(b.Soluong) desc";
+        String sql = "select s.Ten,Sum(b.Soluong) as 'đã bán được' from ChitietSP a join HoaDonChiTiet b on a.Id=b.IdCTSP JOIN HOADON c ON b.IDHD=c.ID join SanPham s on s.Id = a.IdSP "
+                + "join KhuyenMai d on a.IdKM =d.Id where c.TinhTrang =1 AND DAY(NGAYTHANHTOAN) = DAY(GETDATE()) group by s.Ten order by Sum(b.Soluong) desc";
         try {
             Connection conn = DBConnection.openDbConnection();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                ChiTietSP chiTietSP = new ChiTietSP();
-                chiTietSP.setTen(rs.getString(1));
-                lst.add(new ThongKe(rs.getInt(2), chiTietSP));
+                SanPham sp = new SanPham();
+                sp.setTen(rs.getString(1));
+                lst.add(new ThongKe(rs.getInt(2), sp));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -273,16 +274,16 @@ public class ThongKeRepository {
 
     public List<ThongKe> getspByMonth() {
         lst.removeAll(lst);
-        String sql = "select a.Ten,Sum(b.Soluong) as 'đã bán được' from ChitietSP a join HoaDonChiTiet b on a.Id=b.IdCTSP JOIN HOADON c ON b.IDHD=c.ID "
-                + "join KhuyenMai d on a.IdKM =d.Id where c.TinhTrang =1 AND Month(NGAYTHANHTOAN) = Month(GETDATE()) group by a.Ten order by Sum(b.Soluong) desc";
+        String sql = "select s.Ten,Sum(b.Soluong) as 'đã bán được' from ChitietSP a join HoaDonChiTiet b on a.Id=b.IdCTSP JOIN HOADON c ON b.IDHD=c.ID join SanPham s on s.Id = a.IdSP "
+                + "join KhuyenMai d on a.IdKM =d.Id where c.TinhTrang =1 AND Month(NGAYTHANHTOAN) = Month(GETDATE()) group by s.Ten order by Sum(b.Soluong) desc";
         try {
             Connection conn = DBConnection.openDbConnection();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                ChiTietSP chiTietSP = new ChiTietSP();
-                chiTietSP.setTen(rs.getString(1));
-                lst.add(new ThongKe(rs.getInt(2), chiTietSP));
+                SanPham sp = new SanPham();
+                sp.setTen(rs.getString(1));
+                lst.add(new ThongKe(rs.getInt(2), sp));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -312,7 +313,7 @@ public class ThongKeRepository {
 
     public int getbymonth(String date) {
         int box = 0;
-        String sql = "select Sum(a.Soluong) as 'Số sản phẩm' from HoaDonChiTiet a join ChitietSP b on a.IdCTSP =b.id\n"
+        String sql = "select Sum(a.Soluong) as 'Số sản phẩm' from HoaDonChiTiet a join ChitietSP b on a.IdCTSP =b.id "
                 + "join HoaDon c on a.IdHD = c.Id where TinhTrang = 1 and MONTH(c.NgayThanhToan) = ? AND YEAR(NGAYTHANHTOAN) =YEAR(GETDATE())";
         try {
             Connection conn = DBConnection.openDbConnection();
@@ -331,7 +332,7 @@ public class ThongKeRepository {
 
     public int getbyyear(String date) {
         int box = 0;
-        String sql = "select Sum(a.Soluong) as 'Số sản phẩm' from HoaDonChiTiet a join ChitietSP b on a.IdCTSP =b.id\n"
+        String sql = "select Sum(a.Soluong) as 'Số sản phẩm' from HoaDonChiTiet a join ChitietSP b on a.IdCTSP =b.id "
                 + "join HoaDon c on a.IdHD = c.Id where TinhTrang = 1 and Year(c.NgayThanhToan) = ?";
         try {
             Connection conn = DBConnection.openDbConnection();
@@ -350,16 +351,16 @@ public class ThongKeRepository {
 
     public List<ThongKe> getspbyYear() {
         lst.removeAll(lst);
-        String sql = "select a.Ten,Sum(b.Soluong) as 'đã bán được' from ChitietSP a join HoaDonChiTiet b on a.Id=b.IdCTSP JOIN HOADON c ON b.IDHD=c.ID "
-                + "join KhuyenMai d on a.IdKM =d.Id where c.TinhTrang =1 AND Year(NGAYTHANHTOAN) = Year(GETDATE()) group by a.Ten order by Sum(b.Soluong) desc";
+        String sql = "select s.Ten,Sum(b.Soluong) as 'đã bán được' from ChitietSP a join HoaDonChiTiet b on a.Id=b.IdCTSP JOIN HOADON c ON b.IDHD=c.ID join SanPham s on s.Id = a.IdSP "
+                + "join KhuyenMai d on a.IdKM =d.Id where c.TinhTrang =1 AND Year(NGAYTHANHTOAN) = Year(GETDATE()) group by s.Ten order by Sum(b.Soluong) desc";
         try {
             Connection conn = DBConnection.openDbConnection();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                ChiTietSP chiTietSP = new ChiTietSP();
-                chiTietSP.setTen(rs.getString(1));
-                lst.add(new ThongKe(rs.getInt(2), chiTietSP));
+                SanPham sp = new SanPham();
+                sp.setTen(rs.getString(1));
+                lst.add(new ThongKe(rs.getInt(2), sp));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -478,7 +479,7 @@ public class ThongKeRepository {
 
     public int getdtkhoang1(String date, String date1) {
         int box = 0;
-        String sql = "select SUM(TongTien) from HoaDon where TinhTrang = 1\n"
+        String sql = "select SUM(TongTien) from HoaDon where TinhTrang = 1 "
                 + "  and MONTH(NgayThanhToan) between ? and ?";
         try {
             Connection conn = DBConnection.openDbConnection();
@@ -556,8 +557,8 @@ public class ThongKeRepository {
 
     public List<ThongKe> getspkhoang(String date, String date1) {
         lst.removeAll(lst);
-        String sql = "select a.Ten,Sum(b.Soluong) as 'đã bán được' from ChitietSP a join HoaDonChiTiet b on a.Id=b.IdCTSP JOIN HOADON c ON b.IDHD=c.ID "
-                + "join KhuyenMai d on a.IdKM =d.Id where c.TinhTrang =1 AND MONTH(NGAYTHANHTOAN) BETWEEN ? AND ? AND YEAR(NGAYTHANHTOAN)=YEAR(GETDATE()) group by a.Ten order by Sum(b.Soluong) desc";
+        String sql = "select s.Ten,Sum(b.Soluong) as 'đã bán được' from ChitietSP a join HoaDonChiTiet b on a.Id=b.IdCTSP JOIN HOADON c ON b.IDHD=c.ID join SanPham s on s.Id = a.IdSP "
+                + "join KhuyenMai d on a.IdKM =d.Id where c.TinhTrang =1 AND MONTH(NGAYTHANHTOAN) BETWEEN ? AND ? AND YEAR(NGAYTHANHTOAN)=YEAR(GETDATE()) group by s.Ten order by Sum(b.Soluong) desc";
         try {
             Connection conn = DBConnection.openDbConnection();
             PreparedStatement ps = conn.prepareStatement(sql);
@@ -565,9 +566,9 @@ public class ThongKeRepository {
             ps.setString(2, date1);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                ChiTietSP chiTietSP = new ChiTietSP();
-                chiTietSP.setTen(rs.getString(1));
-                lst.add(new ThongKe(rs.getInt(2), chiTietSP));
+                SanPham sp = new SanPham();
+                sp.setTen(rs.getString(1));
+                lst.add(new ThongKe(rs.getInt(2), sp));
             }
         } catch (Exception e) {
             e.printStackTrace();

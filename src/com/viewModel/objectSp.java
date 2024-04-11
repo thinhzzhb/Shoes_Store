@@ -2,29 +2,28 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package com.models;
+package com.viewModel;
 
 /**
  *
- * @author user
+ * @author Admin
  */
-public class DanhMucSP {
+public class objectSp {
     private int id;
     private String ten;
     private double giaNhap;
     private double giaBan;
     
-    public DanhMucSP() {
+    public objectSp() {
     }
 
-    public DanhMucSP(int id, String ten, double giaNhap, double giaBan) {
+    public objectSp(int id, String ten, double giaNhap, double giaBan) {
         this.id = id;
         this.ten = ten;
         this.giaNhap = giaNhap;
         this.giaBan = giaBan;
     }
 
-    
     public int getId() {
         return id;
     }
@@ -56,14 +55,4 @@ public class DanhMucSP {
     public void setGiaBan(double giaBan) {
         this.giaBan = giaBan;
     }
-
-    
-    @Override
-    public String toString() {
-        return ten;
-    }
-    
-    
-    
-    
 }

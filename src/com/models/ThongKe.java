@@ -9,10 +9,12 @@ package com.models;
  * @author Admin
  */
 public class ThongKe {
+
     private double doanhthu, von, loinhuan;
     private Users users;
     private int soSP;
     private ChiTietSP chiTietSP;
+    private SanPham sp;
 
     public ThongKe() {
     }
@@ -28,6 +30,11 @@ public class ThongKe {
     public ThongKe(Users users, int soSP) {
         this.users = users;
         this.soSP = soSP;
+    }
+
+    public ThongKe(int soSP, SanPham sp) {
+        this.soSP = soSP;
+        this.sp = sp;
     }
 
     public ThongKe(int soSP, ChiTietSP chiTietSP) {
@@ -87,4 +94,13 @@ public class ThongKe {
     public void setChiTietSP(ChiTietSP chiTietSP) {
         this.chiTietSP = chiTietSP;
     }
+
+    public SanPham getSp() {
+        return sp;
+    }
+
+    public void setSp(SanPham sp) {
+        this.sp = sp;
+    }
+
 }

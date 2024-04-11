@@ -19,6 +19,8 @@ public interface ISanPhamService {
     boolean updateSoLuongSP(String Masp, int SoLuong);
 
     Integer getIdSanPham(String MaSP);
+    
+    SanPham getTenSanPham(int id);
 
     List<SanPhamViewModel> seachSanPham(String Ten);
 

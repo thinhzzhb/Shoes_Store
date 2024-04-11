@@ -175,7 +175,7 @@ public class HoaDonRepository {
 
         List<HoaDonChiTiet> getList = new ArrayList<>();
         try {
-            String sql = "SELECT c.Ma, b.MA, b.TEN, a.Soluong, Dongia FROM HOADONCHITIET a JOIN ChitietSP b ON a.IdCTSP = b.Id"
+            String sql = "SELECT c.Ma, b.MA, b.IdSP, a.Soluong, Dongia FROM HOADONCHITIET a JOIN ChitietSP b ON a.IdCTSP = b.Id"
                     + " JOIN HOADON c ON a.IDHD = c.ID "
                     + "WHERE c.Ma =?";
             Connection conn = DBConnection.openDbConnection();
@@ -254,7 +254,7 @@ public class HoaDonRepository {
     public List<HoaDonChiTiet> getListHoaDonChiTiet(String MaHD) {
         List<HoaDonChiTiet> getList = new ArrayList<>();
         try {
-            String sql = "SELECT SP.Ma, SP.Ten, MauSac.Ten, KichCo.Ten, HDCT.Dongia, HDCT.Soluong, KM.Giatrigiam, KM.HinhthucKM, HDCT.IdCTSP "
+            String sql = "SELECT SP.Ma, SP.IdSP, MauSac.Ten, KichCo.Ten, HDCT.Dongia, HDCT.Soluong, KM.Giatrigiam, KM.HinhthucKM, HDCT.IdCTSP "
                     + "FROM HoaDon HD JOIN HoaDonChiTiet HDCT ON HD.Id = HDCT.IdHD "
                     + "JOIN ChitietSP SP ON SP.Id = HDCT.IdCTSP join KhuyenMai km ON SP.IdKM = KM.Id "
                     + "JOIN MauSac ON SP.IdMauSac = MauSac.id "

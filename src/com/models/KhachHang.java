@@ -18,12 +18,13 @@ public class KhachHang {
     private String ho;
     private String sdt;
     private String diaChi;
+    private String email;
     
 
     public KhachHang() {
     }
 
-    public KhachHang(Integer id, String MaKH, String ten, String tenDem, String ho, String sdt, String diaChi) {
+    public KhachHang(Integer id, String MaKH, String ten, String tenDem, String ho, String sdt, String diaChi,String email) {
         this.id = id;
         this.MaKH = MaKH;
         this.ten = ten;
@@ -31,6 +32,15 @@ public class KhachHang {
         this.ho = ho;
         this.sdt = sdt;
         this.diaChi = diaChi;
+        this.email = email;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public Integer getId() {

@@ -42,11 +42,11 @@ public class ChiTietSPService implements IChiTietSPService{
         List<ChiTietSP> list = chiTietSPRepository.getAll();
         List<ChiTietSPViewModel> lst = new ArrayList<>();
         for (ChiTietSP x : list) {
-            lst.add(new ChiTietSPViewModel(x.getMa(), x.getTen(), iNSX.getbyid(x.getIdNsx()),
+            lst.add(new ChiTietSPViewModel(x.getMa(), iNSX.getbyid(x.getIdNsx()),
                     imausac.getbyid(x.getIdMauSac()), idanhmuc.getdanhmucbyid(x.getIdDanhMuc()),
                     ikichco.getbyid(x.getIdKichCo()),
                     ikhuyenmai.getbyid(x.getIdKhuyenMai()),
-                    x.getSoLuongTon(), x.getGiaNhap(), x.getGiaBan(), x.getMoTa(), x.getQrCode()));
+                    x.getSoLuongTon(), x.getMoTa(), x.getQrCode()));
                     
         }
         return lst;
@@ -59,15 +59,12 @@ public class ChiTietSPService implements IChiTietSPService{
         for (ChiTietSP x : list) {
             lst.add(new ChiTietSPViewModel(
                     x.getMa(),
-                    x.getTen(),
                     iNSX.getbyid(x.getIdNsx()),
                     imausac.getbyid(x.getIdMauSac()),
                     idanhmuc.getdanhmucbyid(x.getIdDanhMuc()),
                     ikichco.getbyid(x.getIdKichCo()),
                     ikhuyenmai.getbyid(x.getIdKhuyenMai()),
                     x.getSoLuongTon(),
-                    x.getGiaNhap(),
-                    x.getGiaBan(),
                     x.getMoTa(),
                     x.getQrCode()));
         }
@@ -88,7 +85,7 @@ public class ChiTietSPService implements IChiTietSPService{
     @Override
     public boolean Add(ChiTietSPViewModel x) {
         List<ChiTietSP> lst = chiTietSPRepository.check(x.getMa());
-        ChiTietSP ctsp = new ChiTietSP(x.getMa(), x.getTen(), x.getNsx().getId(), x.getMausac().getId(),x.getDanhmuc().getId(), x.getKichco().getId(), 0, x.getSoluongton(), x.getMota(), x.getGiaban(), x.getGianhap(), x.getQrcode());
+        ChiTietSP ctsp = new ChiTietSP(x.getMa(), x.getNsx().getId(), x.getMausac().getId(),x.getDanhmuc().getId(), x.getKichco().getId(), 0, x.getSoluongton(), x.getMota(), x.getQrcode());
         try {
             ChiTietSP xyy = lst.get(0);
             JOptionPane.showMessageDialog(new San_Pham(), "Không để trùng mã");
@@ -106,7 +103,7 @@ public class ChiTietSPService implements IChiTietSPService{
 
     @Override
     public boolean Update(String ma, ChiTietSPViewModel x) {
-        ChiTietSP ctsp = new ChiTietSP(x.getMa(), x.getTen(), x.getNsx().getId(), x.getMausac().getId(),x.getDanhmuc().getId(), x.getKichco().getId(), 0, x.getSoluongton(), x.getMota(), x.getGiaban(), x.getGianhap(), x.getQrcode());
+        ChiTietSP ctsp = new ChiTietSP(x.getMa(), x.getNsx().getId(), x.getMausac().getId(),x.getDanhmuc().getId(), x.getKichco().getId(), 0, x.getSoluongton(), x.getMota(), x.getQrcode());
         if (chiTietSPRepository.update(ctsp, ma) == 1) {
             return true;
         }
@@ -120,15 +117,12 @@ public class ChiTietSPService implements IChiTietSPService{
         for (ChiTietSP x : list) {
             lst.add(new ChiTietSPViewModel(
                     x.getMa(),
-                    x.getTen(),
                     iNSX.getbyid(x.getIdNsx()),
                     imausac.getbyid(x.getIdMauSac()),
                     idanhmuc.getdanhmucbyid(x.getIdDanhMuc()),
                     ikichco.getbyid(x.getIdKichCo()),
                     ikhuyenmai.getbyid(x.getIdKhuyenMai()),
                     x.getSoLuongTon(),
-                    x.getGiaNhap(),
-                    x.getGiaBan(),
                     x.getMoTa(),
                     x.getQrCode()));
         }
@@ -142,7 +136,6 @@ public class ChiTietSPService implements IChiTietSPService{
         for (ChiTietSP x : list) {
             ChiTietSPViewModel sp = new ChiTietSPViewModel();
             sp.setMa(x.getMa());
-            sp.setTen(x.getTen());
             lst.add(sp);
 
         }

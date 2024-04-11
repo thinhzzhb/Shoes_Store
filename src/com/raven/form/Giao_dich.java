@@ -635,8 +635,8 @@ public class Giao_dich extends javax.swing.JPanel implements Runnable, ThreadFac
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
         HoaDonViewModel hd = addHD();
-        int idNV = CurrentUser.getInstance().getIdNV();
-//        int idNV = 1;
+//        int idNV = CurrentUser.getInstance().getIdNV();
+        int idNV = 1;
         Integer addHD = service.saveHD(hd, idNV);
         if (addHD > 0) {
             System.out.println("Thêm thành công");
@@ -672,8 +672,12 @@ public class Giao_dich extends javax.swing.JPanel implements Runnable, ThreadFac
         }
         for (HoaDonChiTietViewModel x : list) {
             GioHangViewModel gioHang = new GioHangViewModel();
+            
+            int idSP = Integer.parseInt(x.getSanPham().getTen());
+            SanPham s = spService.getTenSanPham(idSP);
+            String tenSP = s.getTen();
             gioHang.setMaSP(x.getSanPham().getMa());
-            gioHang.setTenSP(x.getSanPham().getTen());
+            gioHang.setTenSP(tenSP);
             gioHang.setMauSac(x.getMauSac().getTen());
             gioHang.setKichCo(x.getKichCo().getTen());
             gioHang.setSoLuong(x.getSoluong());
@@ -786,6 +790,7 @@ public class Giao_dich extends javax.swing.JPanel implements Runnable, ThreadFac
             JOptionPane.showMessageDialog(this, "Bạn chưa chọn sản phẩm lên giỏ hàng !");
             return;
         }
+        
         int rowHD = tblHoaDon.getSelectedRow();
         if (rowHD < 0) {
             JOptionPane.showMessageDialog(this, "chọn hoá đơn bạn muốn thanh toán");
@@ -810,6 +815,7 @@ public class Giao_dich extends javax.swing.JPanel implements Runnable, ThreadFac
         if (chon != JOptionPane.YES_OPTION) {
             return;
         }
+        
         HoaDonViewModel hoaDon = new HoaDonViewModel();
         hoaDon.setGhiChu(txtGhiChu.getText());
         long millis = System.currentTimeMillis();
@@ -948,11 +954,9 @@ public class Giao_dich extends javax.swing.JPanel implements Runnable, ThreadFac
             Double giam = Double.parseDouble(lblGiamGia.getText());
             int count = 0;
             List<HoaDonChiTietViewModel> _lstGH = service.getListHoaDonChiTiet(MaHD);
-            System.out.println(_lstGH.toString());
             for (HoaDonChiTietViewModel x : _lstGH) {
                 tongTien = tongTien + x.getThanhTien();
                 lblTongTien.setText(String.format("%.0f", tongTien));
-                
                 if (tbGioHang.getValueAt(count, 0).equals(x.getSanPham().getMa()) && x.getSanPham().getKhuyenMai().getHinhThucKM().equals("%")) {
                     tongPT = x.getThanhTien() * x.getSanPham().getKhuyenMai().getGiaTriGiam() / 100;
                     lblGiamGia.setText(String.valueOf(giam += tongPT));
@@ -1279,7 +1283,6 @@ public class Giao_dich extends javax.swing.JPanel implements Runnable, ThreadFac
     }
     
     @Override
-    
     public Thread newThread(Runnable r) {
         Thread t = new Thread(r, "example-runner");
         t.setDaemon(true);

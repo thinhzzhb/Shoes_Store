@@ -70,7 +70,7 @@ private static final String USERNAME = "sa";
     private static final String PASSWORD = "ph19459";
     private static final String SERVER = "localhost";
     private static final String PORT = "1433";
-    private static final String DATABASE_NAME = "DuAn1_shoes_store";
+    private static final String DATABASE_NAME = "Da1_Final";
     private static final boolean USING_SSL = true;
 
     private static String CONNECT_STRING;

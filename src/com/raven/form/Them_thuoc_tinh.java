@@ -29,7 +29,6 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
 
     private INSXService iNSXServices;
     private IMauSacService iMauSacServices;
-    private IDanhMucSPService iDanhMucSPServices;
     private IKichCoService iKichCoServices;
 
     /**
@@ -37,7 +36,6 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
      */
     public Them_thuoc_tinh(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-        iDanhMucSPServices = new DanhMucSPService();
         iKichCoServices = new KichCoService();
         iMauSacServices = new MauSacService();
         iNSXServices = new NSXService();
@@ -78,13 +76,7 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
         }
     }
 
-    private void loadtabledanhmuc() {
-        DefaultTableModel model = (DefaultTableModel) jTable1.getModel();
-        model.setRowCount(0);
-        for (DanhMucSP x : iDanhMucSPServices.getAll()) {
-            model.addRow(new Object[]{x.getId(), x.getTen()});
-        }
-    }
+    
 
     private Objecttt getdatdtb(int row) {
         if (row == -1) {
@@ -114,7 +106,6 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
         rdoKC = new javax.swing.JRadioButton();
         rdoMS = new javax.swing.JRadioButton();
         rdoNSX = new javax.swing.JRadioButton();
-        rdoDM = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btnLamMoi = new javax.swing.JButton();
@@ -147,7 +138,7 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(462, 462, 462)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 468, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addContainerGap())
         );
@@ -159,7 +150,7 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel1)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel4.setBackground(new java.awt.Color(204, 204, 255));
@@ -185,27 +176,20 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
             }
         });
 
-        rdoDM.setText("Danh mục");
-        rdoDM.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rdoDMActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
         jPanel9Layout.setHorizontalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(39, 39, 39)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rdoNSX)
-                    .addComponent(rdoKC))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 95, Short.MAX_VALUE)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(rdoMS)
-                    .addComponent(rdoDM))
-                .addGap(73, 73, 73))
+                .addComponent(rdoKC)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 125, Short.MAX_VALUE)
+                .addComponent(rdoMS)
+                .addGap(85, 85, 85))
+            .addGroup(jPanel9Layout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addComponent(rdoNSX)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel9Layout.setVerticalGroup(
             jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -214,11 +198,9 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
                 .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(rdoKC)
                     .addComponent(rdoMS))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 39, Short.MAX_VALUE)
-                .addGroup(jPanel9Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(rdoNSX)
-                    .addComponent(rdoDM))
-                .addGap(29, 29, 29))
+                .addGap(33, 33, 33)
+                .addComponent(rdoNSX)
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -308,7 +290,7 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1124, Short.MAX_VALUE)
+            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 1122, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -328,11 +310,11 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1122, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 683, Short.MAX_VALUE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
         );
 
         setSize(new java.awt.Dimension(1138, 690));
@@ -348,9 +330,7 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
             loadtablemausac();
         } else if (rdoKC.isSelected() == true) {
             loadtablesize();
-        } else if (rdoDM.isSelected() == true) {
-            loadtabledanhmuc();
-        }
+        } 
     }//GEN-LAST:event_btnLamMoiActionPerformed
 
     private void btnCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCapNhatActionPerformed
@@ -373,10 +353,7 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
         } else if (rdoKC.isSelected() == true) {
             JOptionPane.showMessageDialog(this, iKichCoServices.Update(getdatafrom(), id));
             loadtablesize();
-        } else if (rdoDM.isSelected() == true) {
-            JOptionPane.showMessageDialog(this, iDanhMucSPServices.Update(getdatafrom(), id));
-            loadtabledanhmuc();
-        }
+        } 
     }//GEN-LAST:event_btnCapNhatActionPerformed
 
     private void rdoKCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoKCActionPerformed
@@ -399,13 +376,6 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
             loadtablensx();
         }
     }//GEN-LAST:event_rdoNSXActionPerformed
-
-    private void rdoDMActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rdoDMActionPerformed
-        // TODO add your handling code here:
-        if (rdoDM.isSelected() == true) {
-            loadtabledanhmuc();
-        }
-    }//GEN-LAST:event_rdoDMActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
@@ -432,9 +402,6 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
         } else if (rdoKC.isSelected() == true) {
             JOptionPane.showMessageDialog(this, iKichCoServices.Add(getdatafrom()));
             loadtablesize();
-        } else if (rdoDM.isSelected() == true) {
-            JOptionPane.showMessageDialog(this, iDanhMucSPServices.Add(getdatafrom()));
-            loadtabledanhmuc();
         }
     }//GEN-LAST:event_btnThemActionPerformed
 
@@ -458,7 +425,6 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JRadioButton rdoDM;
     private javax.swing.JRadioButton rdoKC;
     private javax.swing.JRadioButton rdoMS;
     private javax.swing.JRadioButton rdoNSX;

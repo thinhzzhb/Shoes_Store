@@ -111,13 +111,16 @@ public class UserRepostory {
             ResultSet rs = pr.executeQuery();
             while (rs.next()) {
                 User user = new User();
-                user.setHo(rs.getString(4));
-                user.setTenDem(rs.getString(3));
-                user.setTen(rs.getString(2));
-                user.setVaiTro(rs.getInt(12));
+                user.setHo(rs.getString(6));
+                user.setTenDem(rs.getString(5));
+                user.setTen(rs.getString(4));
+                user.setVaiTro(rs.getInt(14));
+                user.setSdt(rs.getString(9));
+                user.setTaiKhoan(rs.getString(10));
+                user.setMatKhau(rs.getString(11));
                 user.setId(rs.getInt(1));
-                user.setMaNV(rs.getString(13));
-                user.setDiaChi(rs.getString(14));
+                user.setMaNV(rs.getString(2));
+                user.setDiaChi(rs.getString(3));
                 list.add(user);
             }
 
