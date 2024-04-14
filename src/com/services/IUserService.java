@@ -22,7 +22,7 @@ public interface IUserService {
     
     boolean updateMK(UsersViewModel us, String mail);
     
-    ArrayList<User> getList(Integer trangThai);
+    ArrayList<User> getList();
     
     void add(User user);
    

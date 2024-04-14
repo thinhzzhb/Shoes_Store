@@ -96,31 +96,26 @@ public class UserRepostory {
         }
     }
     
-    public ArrayList<User> getList(Integer trangThai){
+    public ArrayList<User> getList(){
         ArrayList<User> list = new ArrayList<>();
         String sql = "select * from Users ";
-        if(trangThai != null){
-            sql = "select * from Users where TrangThai = ?";
-        }
         try {
-            
             Connection conn = DBConnection.openDbConnection();
             PreparedStatement pr = conn.prepareStatement(sql);
-            if(trangThai != null)
-                pr.setInt(1, trangThai);
             ResultSet rs = pr.executeQuery();
             while (rs.next()) {
                 User user = new User();
-                user.setHo(rs.getString(6));
-                user.setTenDem(rs.getString(5));
-                user.setTen(rs.getString(4));
-                user.setVaiTro(rs.getInt(14));
-                user.setSdt(rs.getString(9));
-                user.setTaiKhoan(rs.getString(10));
-                user.setMatKhau(rs.getString(11));
-                user.setId(rs.getInt(1));
-                user.setMaNV(rs.getString(2));
-                user.setDiaChi(rs.getString(3));
+                user.setHo(rs.getString("Ho"));
+                user.setTenDem(rs.getString("TenDem"));
+                user.setTen(rs.getString("Ten"));
+                user.setVaiTro(rs.getInt("vaiTro"));
+                user.setSdt(rs.getString("Sdt"));
+                user.setTaiKhoan(rs.getString("TaiKhoan"));
+                user.setMatKhau(rs.getString("MatKhau"));
+                user.setId(rs.getInt("Id"));
+                user.setMaNV(rs.getString("MaNV"));
+                user.setDiaChi(rs.getString("DiaChi"));
+                user.setEmail(rs.getString("Email"));
                 list.add(user);
             }
 
@@ -134,7 +129,7 @@ public class UserRepostory {
     public void save(User user){
         StringBuilder query = new StringBuilder();
         query.append("INSERT INTO ")
-                .append("Users('Ten','TenDem','Ho','Sdt','TaiKhoan','MatKhau','Email','TrangThai','vaiTro,'MaNV','DiaChi')")
+                .append("Users(Ten, TenDem, Ho, Sdt, TaiKhoan, MatKhau, Email, TrangThai, vaiTro, MaNV, DiaChi)")
                 .append("VALUES(? ,? ,? ,? ,? ,? ,? ,? ,? ,? ,? )");
         try{
             Connection con = (Connection) DBConnection.openDbConnection();  
@@ -172,7 +167,7 @@ public class UserRepostory {
                 .append(" MaNV = ? ,")
                 .append(" DiaChi = ? ")
                 .append(" WHERE ")
-                .append(" id = ?");
+                .append(" Id = ?");
         try{
             Connection con = (Connection) DBConnection.openDbConnection();  
             PreparedStatement ps = con.prepareStatement(query.toString());

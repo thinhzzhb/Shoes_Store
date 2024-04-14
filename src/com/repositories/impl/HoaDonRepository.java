@@ -27,40 +27,42 @@ import java.util.List;
 public class HoaDonRepository {
 
     public List<HoaDon> GetAllHD() {
-    String query = "SELECT a.MA, b.TEN, c.TEN, NGAYTAO, NGAYTHANHTOAN, TinhTrang, GHICHU, a.tongTien " +
-                   "FROM HOADON a " +
-                   "JOIN USERS b ON a.IDNV = b.ID " +
-                   "LEFT JOIN KHACHHANG c ON a.IDKH = c.ID";
-    try (Connection con = DBConnection.openDbConnection();  
-         PreparedStatement ps = con.prepareStatement(query);) {
-        ResultSet rs = ps.executeQuery();
-        List<HoaDon> listHD = new ArrayList<>();
-        while (rs.next()) {
-            HoaDon hoadon = new HoaDon();
-            hoadon.setMa(rs.getString(1));
-            hoadon.setGhichu(rs.getString(7));
-            hoadon.setNgayTao(rs.getTimestamp(4));
-            hoadon.setNgayThanhToan(rs.getDate(5));
-            hoadon.setTinhTrang(rs.getInt(6));
-            hoadon.setTongTien(rs.getDouble(8));
-            User u = new User();
-            u.setTen(rs.getString(2));
-            hoadon.setUser(u);
+        String query = "SELECT a.MA, b.TEN, c.Ten, c.Ho, c.TenDem, NGAYTAO, NGAYTHANHTOAN, TinhTrang, GHICHU, a.tongTien " +
+"               FROM HOADON a " +
+"                JOIN USERS b ON a.IDNV = b.ID " +
+"                LEFT JOIN KHACHHANG c ON a.IDKH = c.ID";
+        try ( Connection con = DBConnection.openDbConnection();  PreparedStatement ps = con.prepareStatement(query);) {
+            ResultSet rs = ps.executeQuery();
+            List<HoaDon> listHD = new ArrayList<>();
+            while (rs.next()) {
+                HoaDon hoadon = new HoaDon();
+                hoadon.setMa(rs.getString(1));
+                hoadon.setGhichu(rs.getString(9));
+                hoadon.setNgayTao(rs.getTimestamp(6));
+                hoadon.setNgayThanhToan(rs.getDate(7));
+                hoadon.setTinhTrang(rs.getInt(8));
+                hoadon.setTongTien(rs.getDouble(10));
+                User u = new User();
+                u.setTen(rs.getString(2));
+                hoadon.setUser(u);
 
-            if (rs.getString(3) != null) {
-                KhachHang khachHang = new KhachHang();
-                khachHang.setTen(rs.getString(3));
-                hoadon.setKhachHang(khachHang);
+                if (rs.getString(3) != null) {
+                    KhachHang khachHang = new KhachHang();
+                    khachHang.setTen(rs.getString(3));
+                    khachHang.setTenDem(rs.getString(5));
+                    khachHang.setHo(rs.getString(4));
+                    hoadon.setKhachHang(khachHang);
+                }
+
+                listHD.add(hoadon);
             }
-
-            listHD.add(hoadon);
+            return listHD;
+        } catch (SQLException e) {
+            e.printStackTrace(System.out);
         }
-        return listHD;
-    } catch (SQLException e) {
-        e.printStackTrace(System.out);
+        return null;
     }
-    return null;
-}
+
     public List<HoaDon> getHDTen(String Ten) {
         List<HoaDon> getList = new ArrayList<>();
         try {
@@ -85,10 +87,10 @@ public class HoaDonRepository {
                 hoadon.setUser(u);
 
                 if (rs.getString(3) != null) {
-                KhachHang khachHang = new KhachHang();
-                khachHang.setTen(rs.getString(3));
-                hoadon.setKhachHang(khachHang);
-            }
+                    KhachHang khachHang = new KhachHang();
+                    khachHang.setTen(rs.getString(3));
+                    hoadon.setKhachHang(khachHang);
+                }
 
                 getList.add(hoadon);
             }
@@ -96,6 +98,50 @@ public class HoaDonRepository {
             e.printStackTrace(System.out);
         }
         return getList;
+    }
+
+    public List<HoaDon> getKhachHang(String MaHD) {
+        List<HoaDon> getList = new ArrayList<>();
+        try {
+            String sql = "SELECT kh.Ho , kh.TenDem , kh.Ten , kh.sdt FROM HoaDon hd join KhachHang kh on hd.idKH = kh.id where hd.Ma =?";
+
+            Connection conn = DBConnection.openDbConnection();
+            PreparedStatement pr = conn.prepareStatement(sql);
+            pr.setString(1, MaHD);
+            ResultSet rs = pr.executeQuery();
+            while (rs.next()) {
+
+                KhachHang kh = new KhachHang();
+                kh.setTen(rs.getString(1) + " " + rs.getString(2) + " " + rs.getString(3));
+                kh.setSdt(rs.getString(4));
+                HoaDon hd = new HoaDon();
+                hd.setKhachHang(kh);
+
+                getList.add(hd);
+
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return getList;
+    }
+    
+    public Integer updateHoaDonKhachHang(int Ma, String MaHD) {
+        int rs = 0;
+        try {
+            String sql = "UPDATE HoaDon SET idKH = ? WHERE Ma = ?";
+            Connection conn = DBConnection.openDbConnection();
+            PreparedStatement pr = conn.prepareStatement(sql);
+            pr.setInt(1, Ma);
+            pr.setString(2, MaHD);
+
+            rs = pr.executeUpdate();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+
+        }
+        return rs;
     }
 
     public List<HoaDon> getHDTrangThai(int TrangThai) {
@@ -122,10 +168,10 @@ public class HoaDonRepository {
                 hoadon.setUser(u);
 
                 if (rs.getString(3) != null) {
-                KhachHang khachHang = new KhachHang();
-                khachHang.setTen(rs.getString(3));
-                hoadon.setKhachHang(khachHang);
-            }
+                    KhachHang khachHang = new KhachHang();
+                    khachHang.setTen(rs.getString(3));
+                    hoadon.setKhachHang(khachHang);
+                }
 
                 getList.add(hoadon);
             }
@@ -158,10 +204,10 @@ public class HoaDonRepository {
                 hoadon.setUser(u);
 
                 if (rs.getString(3) != null) {
-                KhachHang khachHang = new KhachHang();
-                khachHang.setTen(rs.getString(3));
-                hoadon.setKhachHang(khachHang);
-            }
+                    KhachHang khachHang = new KhachHang();
+                    khachHang.setTen(rs.getString(3));
+                    hoadon.setKhachHang(khachHang);
+                }
 
                 getList.add(hoadon);
             }
@@ -297,7 +343,7 @@ public class HoaDonRepository {
         }
         return getList;
     }
-    
+
     public Integer insertHoaDonChiTiet(HoaDonChiTiet hdct) {
 
         int result = 0;
@@ -318,7 +364,7 @@ public class HoaDonRepository {
         }
         return result;
     }
-    
+
     public Integer deleteSanPham(int idHD, int idSP) {
         int rs = 0;
         try {
@@ -335,7 +381,7 @@ public class HoaDonRepository {
         }
         return rs;
     }
-    
+
     public Integer clearSanPhamTrenGioHang(int idHD) {
         int rs = 0;
         try {
@@ -352,7 +398,7 @@ public class HoaDonRepository {
         }
         return rs;
     }
-    
+
     public Integer getIdHD(String MaHD) {
         Integer idHD = 0;
         try {
@@ -371,7 +417,7 @@ public class HoaDonRepository {
         }
         return idHD;
     }
-    
+
     public Integer updateTrangThaiHoaDon(HoaDon hd) {
         int rs = 0;
         try {
@@ -392,9 +438,8 @@ public class HoaDonRepository {
         }
         return rs;
     }
-    
-    
-     public Integer updateSoLuongGioHang(int SoLuong, String MaSP, String MaHD) {
+
+    public Integer updateSoLuongGioHang(int SoLuong, String MaSP, String MaHD) {
         int rs = 0;
         try {
             String sql = "UPDATE HoaDonChiTiet SET Soluong = ? WHERE IdHD IN (SELECT ID FROM HoaDon WHERE MA = ?) AND IdCTSP IN (SELECT ID FROM ChitietSP WHERE MA = ?)";

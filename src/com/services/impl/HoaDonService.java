@@ -182,4 +182,15 @@ public class HoaDonService implements IHoaDonService {
         return repo.clearSanPhamTrenGioHang(idHD);
     }
 
+    @Override
+    public Integer updateHoaDonKhachHang(int Ma, String MaHD) {
+        return repo.updateHoaDonKhachHang(Ma, MaHD);
+    }
+
+    @Override
+    public List<HoaDon> getKhachHang(String MaHD) {
+        return repo.getKhachHang(MaHD);
+    }
+
+
 }

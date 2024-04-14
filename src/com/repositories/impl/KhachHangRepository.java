@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -67,6 +69,78 @@ public class KhachHangRepository {
         }
     }
     
+    public String kiemtra(String mail) {
+        String sql = "SELECT EMAIL FROM KhachHang WHERE EMAIL = ?";
+        String box = null;
+        try {
+            Connection conn = DBConnection.openDbConnection();
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, mail);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                box = rs.getString(1);
+            }
+            return box;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public String kiemtrasdt(String sdt) {
+        String sql = "SELECT SDT FROM KhachHang WHERE SDT = ? ";
+        String box = null;
+        try {
+            Connection conn = DBConnection.openDbConnection();
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, sdt);
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                box = rs.getString(1);
+            }
+            return box;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+
+    }
+    
+    public List<KhachHang> GetTK(String SDT) {
+        List<KhachHang> listkh = new ArrayList<>();
+        try {
+            listkh.removeAll(listkh);
+            String sql = "SELECT [Id]\n"
+                    + "      ,[Ten]\n"
+                    + "      ,[TenDem]\n"
+                    + "      ,[Ho]\n"
+                    + "      ,[Gioitinh]\n"
+                    + "      ,[NgaySinh]\n"
+                    + "      ,[Email]\n"
+                    + "      ,[Sdt]\n"
+                    + "      ,[Diemthuong]\n"
+                    + "  FROM [dbo].[KhachHang]\n"
+                    + "  where sdt like ? ";
+            Connection conn = DBConnection.openDbConnection();
+            PreparedStatement pstm = conn.prepareStatement(sql);
+            pstm.setString(1, "%" + SDT + "%");
+            ResultSet rs = pstm.executeQuery();
+            while (rs.next()) {
+                KhachHang khachhang = new KhachHang();
+                khachhang.setId(rs.getInt(1));
+                khachhang.setTen(rs.getString(2));
+                khachhang.setTenDem(rs.getString(3));
+                khachhang.setHo(rs.getString(4));
+                khachhang.setEmail(rs.getString(7));
+                khachhang.setSdt(rs.getString(8));
+
+                listkh.add(khachhang);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(KhuyenMaiRepository.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listkh;
+    }
     public void update(Integer id, KhachHang kh){
         StringBuilder query = new StringBuilder();
         query.append("UPDATE KhachHang SET ")

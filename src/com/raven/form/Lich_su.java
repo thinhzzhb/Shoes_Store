@@ -43,7 +43,7 @@ public class Lich_su extends javax.swing.JPanel {
         for (HoaDonViewModel h : _listHoaDon) {
             _dtmHD.addRow(new Object[]{
                 h.getMa(),
-                (h.getKh() != null) ? h.getKh().getTen() : "",
+                (h.getKh() != null) ? h.getKh().getHo() + " " + h.getKh().getTenDem() + " " + h.getKh().getTen(): "",
                 h.getUs().getTen(),
                 h.getNgayTaoAsString(),
                 h.getNgayThanhToan(),
@@ -61,7 +61,7 @@ public class Lich_su extends javax.swing.JPanel {
         for (HoaDonViewModel h : _listByTen) {
             _dtmHD.addRow(new Object[]{
                 h.getMa(),
-                (h.getKh() != null) ? h.getKh().getTen() : "",
+                (h.getKh() != null) ? h.getKh().getHo() + " " + h.getKh().getTenDem() + " " + h.getKh().getTen(): "",
                 h.getUs().getTen(),
                 h.getNgayTaoAsString(),
                 h.getNgayThanhToan(),
@@ -80,7 +80,7 @@ public class Lich_su extends javax.swing.JPanel {
         for (HoaDonViewModel h : _listByTT) {
             _dtmHD.addRow(new Object[]{
                 h.getMa(),
-                (h.getKh() != null) ? h.getKh().getTen() : "",
+                (h.getKh() != null) ? h.getKh().getHo() + " " + h.getKh().getTenDem() + " " + h.getKh().getTen(): "",
                 h.getUs().getTen(),
                 h.getNgayTaoAsString(),
                 h.getNgayThanhToan(),

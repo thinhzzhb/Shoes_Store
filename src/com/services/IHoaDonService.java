@@ -43,4 +43,9 @@ public interface IHoaDonService {
     Integer deleteSanPham(int idHD, int idSP);
 
     Integer clearSanPhamTrenGioHang(int idHD);
+    
+    Integer updateHoaDonKhachHang(int Ma, String MaHD);
+
+    List<HoaDon> getKhachHang(String MaHD);
+    
 }

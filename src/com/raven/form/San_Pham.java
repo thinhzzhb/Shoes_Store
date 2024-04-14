@@ -111,7 +111,7 @@ public class San_Pham extends javax.swing.JPanel {
             barcode.setType(Linear.CODE128B);
             barcode.setData(x.getQrcode());
             barcode.setI(11.0f);
-            barcode.renderBarcode("D:\\Qrcode\\" + x.getDanhmuc().getTen()+ ".png");
+            barcode.renderBarcode("D:\\Qrcode\\" + x.getDanhmuc().getTen() + ".png");
             System.out.println("xuất thành công");
         } catch (Exception e) {
             System.out.println("xuất thất bại");
@@ -326,8 +326,18 @@ public class San_Pham extends javax.swing.JPanel {
         });
 
         jButton3.setText("Xóa");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Mới");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -715,6 +725,8 @@ public class San_Pham extends javax.swing.JPanel {
 
     private void jLabel37jLabel12MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel37jLabel12MouseClicked
         // TODO add your handling code here:
+        new Them_thuoc_tinh(new javax.swing.JFrame(), true).setVisible(true);
+
     }//GEN-LAST:event_jLabel37jLabel12MouseClicked
 
     private void timKiem3timKiemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_timKiem3timKiemActionPerformed
@@ -743,18 +755,77 @@ public class San_Pham extends javax.swing.JPanel {
 
     private void btnNew2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNew2ActionPerformed
         // TODO add your handling code here:
+        loadData(iChiTietSPServices.getAll());
+        clearForm();
     }//GEN-LAST:event_btnNew2ActionPerformed
 
     private void btnUpdate2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate2ActionPerformed
         // TODO add your handling code here:
+        int row = tblCTSanPham3.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, " Bạn cần chọn 1 dòng để cập nhật");
+            return;
+        }
+        String ma = (String) tblCTSanPham3.getValueAt(row, 0);
+        ChiTietSPViewModel x = getdadtafrom();
+        if (x == null) {
+            return;
+        }
+        int chon = JOptionPane.showConfirmDialog(this, "Bạn Có chắc muốn cập nhật lại sản phẩm ?", "Update", JOptionPane.YES_NO_OPTION);
+        if (chon == JOptionPane.YES_OPTION) {
+            boolean kq = iChiTietSPServices.Update(ma, x);
+            if (kq == true) {
+                loadData(iChiTietSPServices.getAll());
+                JOptionPane.showMessageDialog(this, "Thành công", "Update", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Thất bại", "Update", JOptionPane.INFORMATION_MESSAGE);
+            }
+
+        }
     }//GEN-LAST:event_btnUpdate2ActionPerformed
 
     private void btnInQrcode2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInQrcode2ActionPerformed
         // TODO add your handling code here:
+        int row = tblCTSanPham3.getSelectedRow();
+        if (row == -1) {
+            JOptionPane.showMessageDialog(this, "chọn sản phẩm cần in barcode");
+            return;
+        }
+        ChiTietSPViewModel x = getdataTB(row);
+//        xuatbarcode(x);
+        String data = x.getQrcode();
+        String path = "D:\\Da1_2024\\Shoes_Store//QRcode//" + x.getMa() + ".png";
+        Map<EncodeHintType, ErrorCorrectionLevel> hashMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
+        hashMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+        generateQRcode(data, path, hashMap, 200, 200);
+        JOptionPane.showMessageDialog(this, "In QR Code thành công");
+        System.out.println("QR Code created successfully.");
     }//GEN-LAST:event_btnInQrcode2ActionPerformed
 
     private void btnSave2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSave2ActionPerformed
         // TODO add your handling code here:
+        ChiTietSPViewModel x = getdadtafrom();
+        if (x == null) {
+            return;
+        }
+        int chon = JOptionPane.showConfirmDialog(this, "Bạn có chắc muốn thêm sản phẩm ?", "Thêm sản phẩm mới", JOptionPane.YES_NO_OPTION);
+        if (chon == JOptionPane.YES_OPTION) {
+            if (Integer.valueOf(txtSLTon.getText()) <= 0) {
+                JOptionPane.showMessageDialog(this, "Số lượng tồn phải lớn hơn 0!");
+                return;
+            }
+            boolean kq = iChiTietSPServices.Add(x);
+            if (kq == true) {
+                loadData(iChiTietSPServices.getAll());
+//            xuatbarcode(x);
+                String data = x.getQrcode();
+                String path = "D:\\Da1_2024\\Shoes_Store//QRcode//" + x.getMa() + ".png";
+                Map<EncodeHintType, ErrorCorrectionLevel> hashMap = new HashMap<EncodeHintType, ErrorCorrectionLevel>();
+                hashMap.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.L);
+                generateQRcode(data, path, hashMap, 200, 200);
+                System.out.println("QR Code created successfully.");
+            }
+        }
     }//GEN-LAST:event_btnSave2ActionPerformed
 
     private void txtMaSPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMaSPActionPerformed
@@ -768,6 +839,8 @@ public class San_Pham extends javax.swing.JPanel {
         }
         JOptionPane.showMessageDialog(this, iDanhMucSPServices.Add(getdatafrom()));
         loadtabledanhmuc();
+        loadData(iChiTietSPServices.getAll());
+        clearSP();
     }//GEN-LAST:event_btnThemActionPerformed
 
     private void tblSPMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblSPMouseClicked
@@ -793,9 +866,25 @@ public class San_Pham extends javax.swing.JPanel {
             return;
         }
         int id = (int) tblSP.getValueAt(row, 0);
-            JOptionPane.showMessageDialog(this, iDanhMucSPServices.Update(getdatafrom(), id));
-            loadtabledanhmuc();
+        JOptionPane.showMessageDialog(this, iDanhMucSPServices.Update(getdatafrom(), id));
+        loadtabledanhmuc();
+        clearSP();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        clearSP();
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3ActionPerformed
+    private void clearSP() {
+        txtSanPhamTen.setText("");
+        txtGiaBanSP.setText("");
+        txtGiaNhapSP.setText("");
+    }
+
     private objectSp getdatafrom() {
         Pattern p = Pattern.compile("^[0-9]+$");
         if (txtSanPhamTen.getText().isEmpty()) {

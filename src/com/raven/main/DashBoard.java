@@ -18,7 +18,7 @@ import java.awt.Component;
 import javax.swing.JOptionPane;
 
 public class DashBoard extends javax.swing.JFrame {
-    
+
     public DashBoard() {
         initComponents();
         setBackground(new Color(0, 0, 0, 0));
@@ -37,37 +37,37 @@ public class DashBoard extends javax.swing.JFrame {
                         showForm(new Form(index));
                         break;
                     case 1:
-                        showForm(new San_Pham());
-                        break;
-//                        if (checkRole() == true) {
-//                        }
-//                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
-//                        return;
+                        if (checkRole() == true) {
+                            showForm(new San_Pham());
+                            break;
+                        }
+                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
+                        return;
                     case 2:
-                        showForm(new Nhan_Vien());
-                        break;
-//                        if (checkRole() == true) {
-//                        }
-//                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
-//                        return;
+                        if (checkRole() == true) {
+                            showForm(new Nhan_Vien());
+                            break;
+                        }
+                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
+                        return;
 
                     case 3:
                         showForm(new Giao_dich());
                         break;
                     case 4:
-                        showForm(new Khuyen_Mai());
-                        break;
-//                        if (checkRole() == true) {
-//                        }
-//                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
-//                        return;
+                        if (checkRole() == true) {
+                            showForm(new Khuyen_Mai());
+                            break;
+                        }
+                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
+                        return;
                     case 5:
-                        showForm(new Thong_ke());
-                        break;
-//                        if (checkRole() == true) {
-//                        }
-//                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
-//                        return;
+                        if (checkRole() == true) {
+                            showForm(new Thong_ke());
+                            break;
+                        }
+                        JOptionPane.showMessageDialog(rootPane, "Bạn không có quyền sử dụng chức năng này!");
+                        return;
                     case 6:
                         showForm(new Khach_Hang());
                         break;
@@ -81,23 +81,23 @@ public class DashBoard extends javax.swing.JFrame {
                         System.exit(0);
                         break;
                     default:
-                    
+
                 }
             }
         };
         menu1.initMenu(event);
-        
+
         showForm(
                 new Form(0));
     }
-    
+
     private void showForm(Component com) {
         body.removeAll();
         body.add(com);
         body.revalidate();
         body.repaint();
     }
-    
+
     private boolean checkRole() {
         int role = CurrentUser.getInstance().getVaitro();
         if (role == 1) {
@@ -106,7 +106,7 @@ public class DashBoard extends javax.swing.JFrame {
             return false;
         }
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
@@ -188,6 +188,8 @@ public class DashBoard extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(DashBoard.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 

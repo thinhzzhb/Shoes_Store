@@ -136,6 +136,7 @@ public class ChiTietSPService implements IChiTietSPService{
         for (ChiTietSP x : list) {
             ChiTietSPViewModel sp = new ChiTietSPViewModel();
             sp.setMa(x.getMa());
+            sp.setDanhmuc(idanhmuc.getdanhmucbyid(x.getIdDanhMuc()));
             lst.add(sp);
 
         }

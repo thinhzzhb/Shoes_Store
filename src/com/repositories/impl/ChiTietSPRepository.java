@@ -129,13 +129,14 @@ public class ChiTietSPRepository implements IChiTietSPRepository{
     public List<ChiTietSP> GetAll() {
         try {
             List<ChiTietSP> lst = new ArrayList<>();
-            String sql = "Select Ma from ChitietSP";
+            String sql = "Select Ma,IdSP from ChitietSP";
             Connection conn = DBConnection.openDbConnection();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
                 ChiTietSP sP = new ChiTietSP();
                 sP.setMa(rs.getString(1));
+                sP.setIdDanhMuc(rs.getInt(2));
                 lst.add(sP);
             }
             return lst;

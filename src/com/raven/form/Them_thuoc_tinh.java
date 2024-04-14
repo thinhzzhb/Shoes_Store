@@ -112,6 +112,7 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
         btnCapNhat = new javax.swing.JButton();
         btnThem = new javax.swing.JButton();
 
+        setUndecorated(true);
         setPreferredSize(new java.awt.Dimension(1124, 666));
 
         jPanel1.setBackground(new java.awt.Color(204, 255, 255));
@@ -317,7 +318,7 @@ public class Them_thuoc_tinh extends javax.swing.JDialog {
             .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 651, Short.MAX_VALUE)
         );
 
-        setSize(new java.awt.Dimension(1138, 690));
+        setSize(new java.awt.Dimension(1122, 651));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

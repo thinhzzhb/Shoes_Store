@@ -84,13 +84,13 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public ArrayList<User> getList(Integer trangThai) {
-        return userRepostory.getList(trangThai);
+    public ArrayList<User> getList() {
+        return userRepostory.getList();
     }
 
     @Override
     public void add(User user) {
-        userRepostory.save(user);
+        userRepostory.save (user);
     }
 
     @Override
